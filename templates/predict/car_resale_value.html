@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!-- Custom CSS for Form -->
+<link rel="stylesheet" href="/static/form.css">
+
+<!-- Poster and Heading -->
+<div class="text-center">
+    
+    <img src="/static/use_case_images/5_2.jpg" style="width: 100%; box-shadow: 3px 3px 5px 1px lightslategray;"> 
+    <hr>
+    <h1 class="mt-4">Car Resale Value Prediction</h1>
+</div>
+
+<!-- Data Input Form -->
+<form action="{{ url_for('car_resale_value_predict') }}" method="post">
+    <div class="card rounded-0 mt-5 content-center p-5 " style="display: inline-flexbox;">
+        <div class="form-card text-center">
+            
+            <!-- Input Fields -->
+            <label for="year">Year of First Purchase</label> 
+            <input type="number" id="year" min="1950" max="2021" step="1" name="Year" 
+                   placeholder="YYYY" value="{{ request.form['Year'] }}" required>
+            
+            <div class="row">
+                <div class="col-8 col-md-6"> 
+                    <label for="showroom_price">Showroom Price (in ₹ Lakhs)</label> 
+                    <input type="number" name="Present_Price" id="showroom_price" 
+                           placeholder="₹" value="{{ request.form['Present_Price'] }}" min="0" maxlength="100" required> 
+                </div>
+
+                <div class="col-4 col-md-6">
+                    <label for="kms_driven">Total Kilometers Driven</label> 
+                    <input type="number" name="Kms_Driven" id="kms_driven" placeholder="Kms" 
+                           value="{{ request.form['Kms_Driven'] }}" min="0" required> 
+                </div>
+            </div>            
+
+            <div class="row">
+                <div class="col-4 p-0" >
+                    <label>Fuel Type</label>
+                    <div class="radio-toolbar">
+                        <input type="radio" id="petrol" name="Fuel_Type" value="Petrol" checked>
+                        <label for="petrol">Petrol</label>
+                        <input type="radio" id="diesel" name="Fuel_Type" value="Diesel">
+                        <label for="diesel">Diesel</label>
+                        <input type="radio" id="cng" name="Fuel_Type" value="CNG">
+                        <label for="cng">CNG</label>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label>Transmission Type</label>
+                    <div class="radio-toolbar">
+                        <input type="radio" id="automatic" name="Transmission_Type" value="Automatic" checked>
+                        <label for="automatic">Automatic</label>
+                        <input type="radio" id="manual" name="Transmission_Type" value="Manual">
+                        <label for="manual">Manual</label>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label>Seller Type</label>
+                    <div class="radio-toolbar">
+                        <input type="radio" id="individual" name="Seller_Type" value="Individual" checked>
+                        <label for="individual">Individual</label>
+                        <input type="radio" id="dealer" name="Seller_Type" value="Dealer">
+                        <label for="dealer">Dealer</label>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Select Model -->
+            <div class="container">
+                <h3 class="text-danger mt-4">Choose Algorithm</h3>
+                <div class="radio-toolbar algorithm-radio-toolbar m-auto">
+                    <input type="radio" id="linear_regression" name="Algorithm" value="linear_regressor">
+                    <label for="linear_regression">Linear Regression</label>
+                    <input type="radio" id="support_vector_regression" name="Algorithm" value="support_vector_regressor">
+                    <label for="support_vector_regression">Support Vector Machine</label>
+                    <input type="radio" id="random_forest_regression" name="Algorithm" value="random_forest_regressor" checked>
+                    <label for="random_forest_regression">Random Forest</label>
+                </div>
+            </div>
+
+            <!-- Form Submit Button -->
+            <div class="row">
+                <div class="col-md-6 m-auto mt-3 pt-3"> 
+                    <input type="submit" class="btn btn-info" value="Predict" 
+                    style="font-size: large; color: aliceblue; font-weight: bold;"> 
+                </div>
+            </div>
+
+            <!-- Output Prediction Text -->
+            <div id="OutputPredictionText">
+                <h4 class="text-center">{{ prediction_text }}</h4>
+                {% if scroll %}
+                <script>
+                    document.getElementById('{{ scroll }}').scrollIntoView();
+                    // document.location.hash = '#' + '{{ scroll }}';
+                </script>
+                {% endif %}
+            </div>
+            
+        </div>
+    </div>
+</form>
+
+{% endblock %}

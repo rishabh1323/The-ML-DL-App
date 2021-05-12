@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!-- Custom CSS for Form -->
+<link rel="stylesheet" href="/static/form.css">
+
+<!-- Poster and Heading -->
+<div class="text-center">
+    
+    <img src="/static/use_case_images/4_2.jpg" style="width: 100%; box-shadow: 3px 3px 5px 1px lightslategray;"> 
+    <hr>
+    <h1 class="mt-4">Bank Note Authentication</h1>
+</div>
+
+<!-- Data Input Form -->
+<form action="{{ url_for('bank_note_authentication_predict') }}" method="post">
+    <div class="card rounded-0 mt-5 content-center p-5 " style="display: inline-flexbox;">
+        <div class="form-card text-center">
+            
+            <!-- Input Fields -->
+            <label for="variance">Enter Variance</label> 
+            <input type="number" id="variance" name="Variance" min="-7" max="7" step="0.01"
+                   placeholder="Between -7 and 7" value="{{ request.form['Variance'] }}" required>
+            
+            <div class="row">
+                <div class="col-8 col-md-6"> 
+                    <label for="skewness">Enter Skewness</label> 
+                    <input type="number" id="skewness" name="Skewness" min="-14" max="13" step="0.01"
+                           placeholder="Between -14 and 13" value="{{ request.form['Skewness'] }}" required> 
+                </div>
+
+                <div class="col-4 col-md-6">
+                    <label for="curtosis">Enter Curtosis</label> 
+                    <input type="number" id="curtosis" name="Curtosis" min="-5.3" max="18" step="0.01" 
+                           placeholder="Between -5.3 and 18" value="{{ request.form['Curtosis'] }}" required> 
+                </div>
+            </div>            
+
+            <label for="entropy">Enter Entropy</label> 
+            <input type="number" id="entropy" name="Entropy" min="-8.5" max="2.5" step="0.01" 
+                   placeholder="Between -8.5 and 2.5" value="{{ request.form['Entropy'] }}" required>
+    
+            <!-- Select Model -->
+            <div class="container">
+                <h3 class="text-danger mt-4">Choose Algorithm</h3>
+                <div class="radio-toolbar algorithm-radio-toolbar m-auto">
+                    <input type="radio" id="logistic_classification" name="Algorithm" value="logistic_classifier">
+                    <label for="logistic_classification">Logistic Regression</label>
+                    <input type="radio" id="support_vector_classification" name="Algorithm" value="support_vector_classifier">
+                    <label for="support_vector_classification">Support Vector Machine</label>
+                    <input type="radio" id="random_forest_classification" name="Algorithm" value="random_forest_classifier" checked>
+                    <label for="random_forest_classification">Random Forest</label>
+                </div>
+            </div>
+
+            <!-- Form Submit Button -->
+            <div class="row">
+                <div class="col-md-6 m-auto mt-3 pt-3"> 
+                    <input type="submit" class="btn btn-info" value="Predict" 
+                    style="font-size: large; color: aliceblue; font-weight: bold;"> 
+                </div>
+            </div>
+
+            <!-- Output Prediction Text -->
+            <div id="OutputPredictionText">
+                <h4 class="text-center">{{ prediction_text }}</h4>
+                {% if scroll %}
+                <script>
+                    document.getElementById('{{ scroll }}').scrollIntoView();
+                    // document.location.hash = '#' + '{{ scroll }}';
+                </script>
+                {% endif %}
+            </div>
+            
+        </div>
+    </div>
+</form>
+
+{% endblock %}

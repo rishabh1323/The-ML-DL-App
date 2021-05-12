@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Required Meta Tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.png">
+
+    <!-- Web Application Title -->
+    <title>The ML-DL App</title>
+</head>
+
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+          <div class="container">
+            <a class="navbar-brand mr-4 font-weight-bold" href="{{ url_for('home') }}">The ML-DL App</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+              aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <!-- Navbar Left Side -->
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link ml-1 mr-1" href="{{ url_for('home') }}">Home</a>
+                    <a class="nav-item nav-link ml-1 mr-1" href="{{ url_for('machine_learning') }}">Machine Learning</a>
+                    <a class="nav-item nav-link ml-1 mr-1" href="{{ url_for('deep_learning') }}">Deep Learning</a>
+                </div>
+                <!-- Navbar Right Side -->
+                {% if 'predict' in request.url %}
+                <div class="navbar-nav mr-2">
+                    <a class="nav-item nav-link" href="{{ request.script_root }}">Reset Form</a>
+                </div>    
+                {% endif %}
+
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
+                </div>
+            </div>
+          </div>
+        </nav>
+    </header>
+
+    <!-- Social Media Sidebar -->
+    <div class="icon-bar">
+        <a href="https://www.github.com/rishabh1323" class="github" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github" style="transform: scale(1.6);"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/rishabh-dingliwal" class="linkedin"target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="mailto:dingliwalr@gmail.com" class="google" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-google"></i>
+        </a>
+        <a href="https://www.facebook.com/rishabh.dingliwal.1323" class="facebook" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://www.instagram.com/rishabh_dingliwal" class="instagram" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.twitter.com/Rishabh1323" class="twitter" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-twitter"></i>
+        </a>
+    </div>
+    
+    <!-- Main Block Containing Cards and Right Sidebar-->
+    <main role="main" class="container">
+        <div class="row">
+            <!-- Left Half -->
+            <div class="col-md-9">
+                {% block content %} 
+                
+                {% endblock %}
+            </div>
+            <!-- Right Half -->
+            <div class="col-md-3">
+                <div class="content-section">
+                  <h3>Our Sidebar</h3>
+                  <p class='text-muted'>You can put any information here you'd like.
+                  <ul class="list-group">
+                    <li class="list-group-item list-group-item-light">Latest Posts</li>
+                    <li class="list-group-item list-group-item-light">Announcements</li>
+                    <li class="list-group-item list-group-item-light">Calendars</li>
+                    <li class="list-group-item list-group-item-light">etc</li>
+                  </ul>
+                  </p>
+                </div>
+                {% if request.path not in ['', '/', '/home', '/machine-learning', '/deep-learning'] %}
+                <a href="{{ source_code_link }}" id="source-code-button" class="github"
+                   target="_blank" rel="noopener noreferrer">
+                    <div class="content-section">
+                        Source Code <i class="fab fa-github fa-2x"></i>
+                    </div>
+                </a>
+                {% if dataset_link %}
+                <a href="{{ dataset_link }}" id="dataset-button" class="kaggle"
+                   target="_blank" rel="noopener noreferrer">
+                    <div class="content-section">
+                        Find Dataset on <i class="fab fa-kaggle"></i>
+                    </div>
+                </a>
+                {% endif %}
+                {% endif %}
+            </div>  
+        </div>
+    </main>
+
+    <!-- Page Footer -->
+    <footer class="page-footer font-small mt-4">
+        <div class="col-md-12 py-2">
+        <div class="flex-center text-center mt-2 mb-2 py-2">
+            <a href="https://www.github.com/rishabh1323/" class="footer-icon-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github fa-lg fa-2x footer-icon"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/rishabh-dingliwal" class="footer-icon-link" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-linkedin fa-lg fa-2x footer-icon"> </i>
+        </a>
+            <a href="mailto:dingliwalr@gmail.com" class="footer-icon-link" target="_blank" rel="noopener noreferrer">
+                <i class="fa fa-envelope fa-lg fa-2x footer-icon"> </i>
+            </a>
+            <a href="https://www.instagram.com/rishabh_dingliwal" class="footer-icon-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-instagram fa-lg fa-2x footer-icon"> </i>
+            </a>
+            <a href="https://www.facebook.com/rishabh.dingliwal.1323" class="footer-icon-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-facebook-f fa-lg fa-2x footer-icon"> </i>
+            </a>
+            <a href="https://www.twitter.com/Rishabh1323" class="footer-icon-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-twitter fa-lg fa-2x footer-icon"> </i>
+            </a>
+        </div>
+        </div>
+
+        <!-- Contact Number -->
+        <div class="text-center text-white" style="font-weight: lighter;">
+            Contact At : 
+            <a href="tel:+919818797400" style="font-weight: lighter; color: white; text-decoration: none;">
+                +91 9818797400
+            </a>
+        </div>
+
+        <!-- Copyright Name -->
+        <div class="footer-copyright py-3 text-white text-center">
+            Made with 
+            <img src="/static/heart.png" class="ml-1 mr-1" style="height: 1rem; width: 1rem;">
+            by Rishabh Dingliwal
+        </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+</html>
