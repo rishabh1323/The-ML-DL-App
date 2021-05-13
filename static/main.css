@@ -178,7 +178,7 @@ footer {
 
 #source-code-button div:hover{
     transform: scale(1.01);
-    box-shadow: 0px 0px 3px 1px white;
+    box-shadow: 0px 0px 3px 1px lightblue;
 }
 
 #source-code-button div i {
