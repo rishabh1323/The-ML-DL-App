@@ -38,36 +38,46 @@ def deep_learning():
 # House Price Prediction Page
 @app.route("/house-price-prediction", methods=['GET', 'POST'])
 def house_price_prediction():
-    source_code_link = ""
-    dataset_link = "https://www.kaggle.com/c/house-prices-advanced-regression-techniques"
-    return render_template("predict/house_price_prediction.html", source_code_link=source_code_link, dataset_link=dataset_link)
+    data_dict = {
+        "source_code_link" : "https://github.com/rishabh1323/House-Price-Prediction",
+        "dataset_link" : "https://www.kaggle.com/c/house-prices-advanced-regression-techniques"
+    }    
+    return render_template("predict/house_price_prediction.html", data_dict=data_dict)
 
 # Bank Note Authentication Page
 @app.route("/bank-note-authentication", methods=['GET', 'POST'])
 def bank_note_authentication():
-    source_code_link = ""
-    dataset_link = "https://www.kaggle.com/ritesaluja/bank-note-authentication-uci-data"
-    return render_template("predict/bank_note_authentication.html", source_code_link=source_code_link, dataset_link=dataset_link)
+    data_dict = {
+        "source_code_link" : "https://github.com/rishabh1323/Bank-Note-Authentication",
+        "dataset_link" : "https://www.kaggle.com/ritesaluja/bank-note-authentication-uci-data"
+    }
+    return render_template("predict/bank_note_authentication.html", data_dict=data_dict)
 
 # Car Resale Value Page
 @app.route("/car-resale-value", methods=['GET', 'POST'])
 def car_resale_value():
-    source_code_link = ""
-    dataset_link = "https://www.kaggle.com/nehalbirla/vehicle-dataset-from-cardekho"
-    return render_template("predict/car_resale_value.html", source_code_link=source_code_link, dataset_link=dataset_link)
+    data_dict = {
+        "source_code_link" : "https://github.com/rishabh1323/Car-Resale-Value-Prediction",
+        "dataset_link" : "https://www.kaggle.com/nehalbirla/vehicle-dataset-from-cardekho"
+    }
+    return render_template("predict/car_resale_value.html", data_dict=data_dict)
 
 # Digit Recognition Page
 @app.route("/digit-recognition", methods=['GET', 'POST'])
 def digit_recognition():
-    source_code_link = ""
-    dataset_link = "https://www.kaggle.com/scolianni/mnistasjpg"
-    return render_template("predict/digit_recognition.html", source_code_link=source_code_link, dataset_link=dataset_link)
+    data_dict = {
+        "source_code_link" : "https://github.com/rishabh1323/Deep-Learning-Basic-Projects/blob/main/mnist_digit_recognizer.ipynb",
+        "dataset_link" : "https://www.kaggle.com/scolianni/mnistasjpg"
+    }
+    return render_template("predict/digit_recognition.html", data_dict=data_dict)
 
 # Rock Paper Scissors Page
 @app.route("/rock-paper-scissors", methods=['GET', 'POST'])
 def rock_paper_scissors():
-    source_code_link = ""
-    return render_template("predict/rock_paper_scissors.html", source_code_link=source_code_link)
+    data_dict = {
+        "source_code_link" : "https://github.com/rishabh1323/Deep-Learning-Basic-Projects/blob/main/rock_paper_scissors.ipynb"
+    }
+    return render_template("predict/rock_paper_scissors.html", data_dict=data_dict)
 
 #################################
 ##### Routes for Prediction #####

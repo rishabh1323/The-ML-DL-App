@@ -102,20 +102,35 @@
                     </a>
                 </div>
                 {% if request.path not in ['', '/', '/home', '/about', '/machine-learning', '/deep-learning'] %}
-                <a href="{{ source_code_link }}" id="source-code-button" class="github"
+                <a href="{{ data_dict.get('source_code_link') }}" id="source-code-button" class="github"
                    target="_blank" rel="noopener noreferrer">
                     <div class="content-section">
                         Source Code <i class="fab fa-github fa-2x"></i>
                     </div>
                 </a>
-                {% if dataset_link %}
-                <a href="{{ dataset_link }}" id="dataset-button" class="kaggle"
+                {% if data_dict.get(dataset_link) != "" %}
+                <a href="{{ data_dict.get('dataset_link') }}" id="dataset-button" class="kaggle"
                    target="_blank" rel="noopener noreferrer">
                     <div class="content-section">
                         Find Dataset <i class="fab fa-kaggle"></i>
                     </div>
                 </a>
                 {% endif %}
+                <div class="content-section text-center py-2" style="width: 100%;">
+                    <h5 class="mt-1">Stats For Nerds</h5>
+                    <hr>
+                    <p>
+                        <button class="content-section stats-button" type="button" data-toggle="collapse" data-target="#collapseExample" 
+                                aria-expanded="false" aria-controls="collapseExample">
+                            Statistics Button <i class="fas fa-caret-down ml-2"></i>
+                        </button>
+                    </p> 
+                    <div class="collapse mt-0" id="collapseExample">
+                        <div class="mt-n3">    
+                          <img src="/static/use_case_images/stats_temp.png" class="stats-image">
+                        </div>
+                    </div>
+                </div>
                 {% endif %}
             </div>  
         </div>
