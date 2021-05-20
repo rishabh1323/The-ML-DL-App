@@ -40,7 +40,19 @@ def deep_learning():
 def house_price_prediction():
     data_dict = {
         "source_code_link" : "https://github.com/rishabh1323/House-Price-Prediction",
-        "dataset_link" : "https://www.kaggle.com/c/house-prices-advanced-regression-techniques"
+        "dataset_link" : "https://www.kaggle.com/c/house-prices-advanced-regression-techniques",
+        "stats_images_list" : {
+            "bar_plot" : [
+                "/static/statistics_images/1_bar_1.png", "/static/statistics_images/1_bar_2.png",
+                "/static/statistics_images/1_bar_3.png", "/static/statistics_images/1_bar_4.png"
+            ],
+            "scatter_plot" : [
+                "/static/statistics_images/1_scatter_1.png"
+            ],
+            "distribution_plot" : [
+                "/static/statistics_images/1_dist_1.png", "/static/statistics_images/1_dist_2.png"
+            ]
+        }
     }    
     return render_template("predict/house_price_prediction.html", data_dict=data_dict)
 
@@ -49,8 +61,21 @@ def house_price_prediction():
 def bank_note_authentication():
     data_dict = {
         "source_code_link" : "https://github.com/rishabh1323/Bank-Note-Authentication",
-        "dataset_link" : "https://www.kaggle.com/ritesaluja/bank-note-authentication-uci-data"
-    }
+        "dataset_link" : "https://www.kaggle.com/ritesaluja/bank-note-authentication-uci-data",
+        "stats_images_list" : {
+            "box_plot" : [
+                "/static/statistics_images/4_box_1.png", "/static/statistics_images/4_box_2.png",
+                "/static/statistics_images/4_box_3.png", "/static/statistics_images/4_box_4.png"
+            ],
+            "count_plot" : [
+                "/static/statistics_images/4_count_1.png"
+            ],
+            "distribution_plot" : [
+                "/static/statistics_images/4_dist_1.png", "/static/statistics_images/4_dist_2.png",
+                "/static/statistics_images/4_dist_3.png", "/static/statistics_images/4_dist_4.png"
+            ]
+        }
+    }   
     return render_template("predict/bank_note_authentication.html", data_dict=data_dict)
 
 # Car Resale Value Page
@@ -58,7 +83,24 @@ def bank_note_authentication():
 def car_resale_value():
     data_dict = {
         "source_code_link" : "https://github.com/rishabh1323/Car-Resale-Value-Prediction",
-        "dataset_link" : "https://www.kaggle.com/nehalbirla/vehicle-dataset-from-cardekho"
+        "dataset_link" : "https://www.kaggle.com/nehalbirla/vehicle-dataset-from-cardekho",
+        "stats_images_list" : {
+            "bar_plot" : [
+                "/static/statistics_images/5_bar_1.png", "/static/statistics_images/5_bar_2.png",
+                "/static/statistics_images/5_bar_3.png", "/static/statistics_images/5_bar_4.png"
+            ],
+            "box_plot" : [
+                "/static/statistics_images/5_box_1.png", "/static/statistics_images/5_box_2.png",
+                "/static/statistics_images/5_box_3.png", "/static/statistics_images/5_box_4.png"
+            ],
+            "scatter_plot" : [
+                "/static/statistics_images/5_scatter_1.png", "/static/statistics_images/5_scatter_2.png"
+            ],
+            "distribution_plot" : [
+                "/static/statistics_images/5_dist_1.png", "/static/statistics_images/5_dist_2.png",
+                "/static/statistics_images/5_dist_3.png", "/static/statistics_images/5_dist_4.png"
+            ]
+        }
     }
     return render_template("predict/car_resale_value.html", data_dict=data_dict)
 
