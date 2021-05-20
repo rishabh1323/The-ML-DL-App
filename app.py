@@ -126,7 +126,12 @@ def rock_paper_scissors():
 #################################
 
 # House Price Prediction
-
+@app.route("/house-price-prediction/predict", methods=['GET', 'POST'])
+def house_price_prediction_predict():
+    if request.method == 'POST':
+        prediction_text = ""
+        return render_template("predict/house_price_prediction.html", prediction_text=prediction_text, scroll='OutputPredictionText')
+    return redirect(url_for('house_price_prediction'))
 
 # Bank Note Authentication 
 @app.route("/bank-note-authentication/predict", methods=['GET', 'POST'])

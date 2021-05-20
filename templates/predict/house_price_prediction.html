@@ -1,6 +1,160 @@
 {% extends "layout.html" %}
 {% block content %}
+
+<!-- Custom CSS for Form -->
+<link rel="stylesheet" href="/static/form.css">
+
+<!-- Poster and Heading -->
+<div class="text-center">
     
-    <img src="/static/use_case_images/1_1.png" alt="">
+    <img src="/static/use_case_images/1_1.png" style="width: 100%; box-shadow: 3px 3px 5px 1px lightslategray;"> 
+    <hr>
+    <h1 class="mt-4">House Price Prediction</h1>
+</div>
+
+<!-- Data Input Form -->
+<form action="{{ url_for('house_price_prediction_predict') }}" method="post">
+    <div class="card rounded-0 mt-5 content-center p-5 " style="display: inline-flexbox;">
+        <div class="form-card text-center">
+            
+            <!-- Form Row 1 -->
+            <div class="row mb-2 mt-0">
+                <div class="col-4 col-md-4">
+                    <label for="grlivarea">Living Area Above Ground <small>(in sq. feet)</small></label> 
+                    <input type="number" name="GrLivArea" id="grlivarea" placeholder="Commonly between 300 and 3000 sq. feet" 
+                           value="{{ request.form['GrLivArea'] }}" min="100" max="5000" step="0.01" required> 
+                </div>
+                <div class="col-4 col-md-4">
+                    <label for="1stflrsf">Area of First Floor <br><small>(in sq. feet)</small></label> 
+                    <input type="number" name="1stFlrSF" id="1stflrsf" placeholder="Commonly between 200 and 2200 sq. feet" 
+                           value="{{ request.form['1stFlrSF'] }}" min="100" max="3000" step="0.01" required> 
+                </div>
+                <div class="col-4 col-md-4">
+                    <label for="yearremodadd">Year of Remodelling <small>(Construction Date For NA)</small> </label> 
+                    <input type="number" name="YearRemodAdd" id="yearremodadd" placeholder="Between 1950 and 2010" 
+                           value="{{ request.form['YearRemodAdd'] }}" min="1950" max="2010" step="1" required> 
+                </div>
+            </div>
+
+            <!-- Form Row 3 -->
+            <div class="row mb-5">
+                <div class="col-8 col-md-4">
+                    <label for="bldgtype">Building Type</label>
+                    <select class="form-control" name="BldgType" id="bldgtype" value="{{ request.form['BldgType'] }}" required>
+                        <option value="1Fam">Single-Family Detached</option>
+                        <option value="2FmCon">Two-Family Conversion</option>
+                        <option value="Duplx">Duplex</option>
+                        <option value="TwnhsE">Townhouse End Unit</option>
+                        <option value="TwnhsI">Townhouse Inside Unit</option>
+                    </select>
+                </div>
+                <div class="col-8 col-md-4">
+                    <label for="fireplaces">Number of Fireplaces</label>
+                    <select class="form-control" name="Fireplaces" id="fireplaces" value="{{ request.form['Fireplaces'] }}" required>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div class="col-8 col-md-4">
+                    <label for="kitchenqual">Kitchen Quality</label>
+                    <select class="form-control" name="KitchenQual" id="kitchenqual" value="{{ request.form['KitchenQual'] }}" required>
+                        <option value="Ex">Excellent</option>
+                        <option value="Gd">Good</option>
+                        <option value="TA">Average/Typical</option>
+                        <option value="Fa">Fair</option>
+                        <option value="Po">Poor</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Form Row 4 -->
+            <div class="row mb-5">
+                <div class="col-8 col-md-4">
+                    <label for="heatingqc">Heating Quality & Condition</label>
+                    <select class="form-control" name="HeatingQC" id="heatingqc" value="{{ request.form['HeatingQC'] }}" required>
+                        <option value="Ex">Excellent</option>
+                        <option value="Gd">Good</option>
+                        <option value="TA">Average/Typical</option>
+                        <option value="Fa">Fair</option>
+                        <option value="Po">Poor</option>
+                    </select>
+                </div>
+                <div class="col-8 col-md-4">
+                    <label for="exterqual">Material Quality on Exterior</label>
+                    <select class="form-control" name="ExterQual" id="exterqual" value="{{ request.form['ExterQual'] }}" required>
+                        <option value="Ex">Excellent</option>
+                        <option value="Gd">Good</option>
+                        <option value="TA">Average/Typical</option>
+                        <option value="Fa">Fair</option>
+                        <option value="Po">Poor</option>
+                    </select>
+                </div>
+                <div class="col-8 col-md-4">
+                    <label for="lotshape">General Shape of Property</label>
+                    <select class="form-control" name="LotShape" id="lotshape" value="{{ request.form['LotShape'] }}" required>
+                        <option value="Reg">Regular</option>
+                        <option value="IR1">Slighlty Irregular</option>
+                        <option value="IR2">Moderately Irregular</option>
+                        <option value="IR3">Irregular</option>
+                    </select>
+                </div>
+            </div>          
+
+            <!-- Form Row 5 -->
+            <div class="row mb-1">
+                <div class="col-4 p-0" >
+                    <label>Central Air Conditioning</label>
+                    <div class="radio-toolbar">
+                        <input type="radio" id="yes" name="CentralAir" value="Y" checked>
+                        <label for="yes">Yes</label>
+                        <input type="radio" id="no" name="CentralAir" value="N">
+                        <label for="no">No</label>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="overallqual" class="form-label">Overall Quality & Finish</label>
+                    <input type="range" class="form-range" name="OverallQual" min="1" max="10" step="1" id="overallqual">
+                </div>
+            </div>
+    
+            <!-- Select Model -->
+            <div class="container">
+                <h3 class="text-danger mt-4">Choose Algorithm</h3>
+                <div class="radio-toolbar algorithm-radio-toolbar m-auto">
+                    <input type="radio" id="linear_regression" name="Algorithm" value="linear_regressor" checked>
+                    <label for="linear_regression">Linear Regression</label>
+                    <input type="radio" id="support_vector_regression" name="Algorithm" value="support_vector_regressor">
+                    <label for="support_vector_regression">Support Vector Machine</label>
+                    <input type="radio" id="random_forest_regression" name="Algorithm" value="random_forest_regressor">
+                    <label for="random_forest_regression">Random Forest</label>
+                    <input type="radio" id="xgboost_regression" name="Algorithm" value="xgboost_regressor">
+                    <label for="xgboost_regression">XGBoost</label>
+                </div>
+            </div>
+
+            <!-- Form Submit Button -->
+            <div class="row">
+                <div class="col-md-6 m-auto mt-3 pt-3"> 
+                    <input type="submit" class="btn btn-info" value="Predict" 
+                    style="font-size: large; color: aliceblue; font-weight: bold;"> 
+                </div>
+            </div>
+
+            <!-- Output Prediction Text -->
+            <div id="OutputPredictionText">
+                <h4 class="text-center">{{ prediction_text }}</h4>
+                {% if scroll %}
+                <script>
+                    document.getElementById('{{ scroll }}').scrollIntoView();
+                    // document.location.hash = '#' + '{{ scroll }}';
+                </script>
+                {% endif %}
+            </div>
+            
+        </div>
+    </div>
+</form>
 
 {% endblock %}
