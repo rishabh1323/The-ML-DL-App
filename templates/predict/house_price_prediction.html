@@ -9,7 +9,7 @@
     
     <img src="/static/use_case_images/1_1.png" style="width: 100%; box-shadow: 3px 3px 5px 1px lightslategray;"> 
     <hr>
-    <h1 class="mt-4">House Price Prediction</h1>
+    <h1 class="mt-4 mb-n3">House Price Prediction</h1>
 </div>
 
 <!-- Data Input Form -->
@@ -18,21 +18,46 @@
         <div class="form-card text-center">
             
             <!-- Form Row 1 -->
-            <div class="row mb-2 mt-0">
+            <div class="row mb-3 mt-0">
                 <div class="col-4 col-md-4">
                     <label for="grlivarea">Living Area Above Ground <small>(in sq. feet)</small></label> 
-                    <input type="number" name="GrLivArea" id="grlivarea" placeholder="Commonly between 300 and 3000 sq. feet" 
+                    <input type="number" name="GrLivArea" id="grlivarea" placeholder="~ between 300 and 3000" 
                            value="{{ request.form['GrLivArea'] }}" min="100" max="5000" step="0.01" required> 
                 </div>
                 <div class="col-4 col-md-4">
                     <label for="1stflrsf">Area of First Floor <br><small>(in sq. feet)</small></label> 
-                    <input type="number" name="1stFlrSF" id="1stflrsf" placeholder="Commonly between 200 and 2200 sq. feet" 
+                    <input type="number" name="1stFlrSF" id="1stflrsf" placeholder="~ between 200 and 2200" 
                            value="{{ request.form['1stFlrSF'] }}" min="100" max="3000" step="0.01" required> 
                 </div>
                 <div class="col-4 col-md-4">
-                    <label for="yearremodadd">Year of Remodelling <small>(Construction Date For NA)</small> </label> 
+                    <label for="yearremodadd">Year of Remodelling <small>(Construction Date if NA)</small> </label> 
                     <input type="number" name="YearRemodAdd" id="yearremodadd" placeholder="Between 1950 and 2010" 
                            value="{{ request.form['YearRemodAdd'] }}" min="1950" max="2010" step="1" required> 
+                </div>
+            </div>
+
+            <!-- Form Row 2 -->
+            <div class="row mb-5">
+                <div class="col-8 col-md-6">
+                    <label for="mszoning">General Zone Category</label>
+                    <select class="form-control" name="MSZoning" id="mszoning" value="{{ request.form['MSZoning'] }}">
+                        <option value="A">Agricultural</option>
+                        <option value="C">Commercial</option>
+                        <option value="FV">Floating Village Residential</option>
+                        <option value="I">Industrial</option>
+                        <option value="RH">Residential High Density</option>
+                        <option value="RL">Residential Low Density</option>
+                        <option value="RP">Residential Low Density Park</option>
+                        <option value="RM">Residential Medium Density</option>
+                    </select>
+                </div>
+                <div class="col-8 col-md-6">
+                    <label for="paveddrive">Driveway Type</label>
+                    <select class="form-control" name="PavedDrive" id="paveddrive" value="{{ request.form['PavedDrive'] }}">
+                        <option value="Y">Paved</option>
+                        <option value="P">Partially Paved</option>
+                        <option value="N">Dirt/Gravel</option>
+                    </select>
                 </div>
             </div>
 
@@ -40,7 +65,7 @@
             <div class="row mb-5">
                 <div class="col-8 col-md-4">
                     <label for="bldgtype">Building Type</label>
-                    <select class="form-control" name="BldgType" id="bldgtype" value="{{ request.form['BldgType'] }}" required>
+                    <select class="form-control" name="BldgType" id="bldgtype" value="{{ request.form['BldgType'] }}">
                         <option value="1Fam">Single-Family Detached</option>
                         <option value="2FmCon">Two-Family Conversion</option>
                         <option value="Duplx">Duplex</option>
@@ -50,7 +75,7 @@
                 </div>
                 <div class="col-8 col-md-4">
                     <label for="fireplaces">Number of Fireplaces</label>
-                    <select class="form-control" name="Fireplaces" id="fireplaces" value="{{ request.form['Fireplaces'] }}" required>
+                    <select class="form-control" name="Fireplaces" id="fireplaces" value="{{ request.form['Fireplaces'] }}">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -59,7 +84,7 @@
                 </div>
                 <div class="col-8 col-md-4">
                     <label for="kitchenqual">Kitchen Quality</label>
-                    <select class="form-control" name="KitchenQual" id="kitchenqual" value="{{ request.form['KitchenQual'] }}" required>
+                    <select class="form-control" name="KitchenQual" id="kitchenqual" value="{{ request.form['KitchenQual'] }}">
                         <option value="Ex">Excellent</option>
                         <option value="Gd">Good</option>
                         <option value="TA">Average/Typical</option>
@@ -71,9 +96,112 @@
 
             <!-- Form Row 4 -->
             <div class="row mb-5">
+                <div class="col-8 col-md-6">
+                    <label for="garagetype">Garage Type</label>
+                    <select class="form-control" name="GarageType" id="garagetype" value="{{ request.form['GarageType'] }}">
+                        <option value="Attchd">Attached to Home</option>
+                        <option value="Basment">Basement Garage</option>
+                        <option value="BuiltIn">Built-In Garage</option>
+                        <option value="CarPort">Car Port</option>
+                        <option value="Detchd">Detached from Home</option>
+                        <option value="2types">More than 1 Type of Garage Present</option>
+                        <option value="NA">No Garage</option>
+                    </select>
+                </div>
+                <div class="col-8 col-md-6">
+                    <label for="garagefinish">Interior Finish of Garage</label>
+                    <select class="form-control" name="GarageFinish" id="garagefinish" value="{{ request.form['GarageFinish'] }}">
+                        <option value="Fin">Finished</option>
+                        <option value="RFn">Rough Finished</option>
+                        <option value="Unf">Unfinished</option>
+                        <option value="NA">No Garage</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Form Row 5 -->
+            <div class="row mb-5">
+                <div class="col-4 p-0" >
+                    <label>Number of Cars <br> Garage Can Hold</label>
+                    <div class="radio-toolbar">
+                        <input type="radio" id="0" name="GarageCars" value="0">
+                        <label for="0">0</label>
+                        <input type="radio" id="1" name="GarageCars" value="1" checked>
+                        <label for="1">1</label>
+                        <input type="radio" id="2" name="GarageCars" value="2">
+                        <label for="2">2</label>
+                        <input type="radio" id="3" name="GarageCars" value="3">
+                        <label for="3">3</label>
+                        <input type="radio" id="4" name="GarageCars" value="4">
+                        <label for="4">4</label>
+                    </div>
+                </div>
+                <div class="col-4 p-0" >
+                    <label>Is Central Air <br> Conditioning Installed</label>
+                    <div class="radio-toolbar">
+                        <input type="radio" id="yes" name="CentralAir" value="Y">
+                        <label for="yes">Yes</label>
+                        <input type="radio" id="no" name="CentralAir" value="N" checked>
+                        <label for="no">No</label>
+                    </div>
+                </div>
+                <div class="col-4 p-0" >
+                    <label>Number of Full <br> Bathrooms in Basement</label>
+                    <div class="radio-toolbar">
+                        <input type="radio" id="0" name="BsmtFullBath" value="0" checked>
+                        <label for="0">0</label>
+                        <input type="radio" id="1" name="BsmtFullBath" value="1">
+                        <label for="1">1</label>
+                        <input type="radio" id="2" name="BsmtFullBath" value="2">
+                        <label for="2">2</label>
+                        <input type="radio" id="3" name="BsmtFullBath" value="3">
+                        <label for="3">3</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Row 6 -->
+            <div class="row mb-5">
+                <div class="col-8 col-md-4">
+                    <label for="bsmtexposure">Basement Exposure <br><small>(to garden/outside walls)</small></label>
+                    <select class="form-control" name="BsmtExposure" id="bsmtexposure" value="{{ request.form['BsmtExposure'] }}">
+                        <option value="Gd">Good Exposure</option>
+                        <option value="Av">Average Exposure</option>
+                        <option value="Mn">Minimum Exposure</option>
+                        <option value="No">No Exposure</option>
+                        <option value="NA">No Basement</option>
+                    </select>
+                </div>
+                <div class="col-8 col-md-4">
+                    <label for="bsmtfintype1">Basement Finishing Quality</label>
+                    <select class="form-control" name="BsmtFinType1" id="bsmtfintype1" value="{{ request.form['BsmtFinType1'] }}">
+                        <option value="GLQ">Good Living Quarters</option>
+                        <option value="ALQ">Average Living Quarters</option>
+                        <option value="BLQ">Below Average Living Quarters</option>
+                        <option value="ReC">Average Recreation Room</option>
+                        <option value="LwQ">Low Quality</option>
+                        <option value="Unf">Unfinished</option>
+                        <option value="NA">No Basement</option>
+                    </select>
+                </div>
+                <div class="col-8 col-md-4">
+                    <label for="bsmtqual">Height of Basement <br><small>(in inches)</small></label>
+                    <select class="form-control" name="BsmtQual" id="bsmtqual" value="{{ request.form['BsmtQual'] }}">
+                        <option value="Ex">Excellent (100+ inches)</option>
+                        <option value="Gd">Good (90-99 inches)</option>
+                        <option value="TA">Average/Typical (80-89 inches)</option>
+                        <option value="Fa">Fair (70-79 inches)</option>
+                        <option value="Po">Poor (&lt;70 inches)</option>
+                        <option value="NA">No Basement</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Form Row 7 -->
+            <div class="row mb-5">
                 <div class="col-8 col-md-4">
                     <label for="heatingqc">Heating Quality & Condition</label>
-                    <select class="form-control" name="HeatingQC" id="heatingqc" value="{{ request.form['HeatingQC'] }}" required>
+                    <select class="form-control" name="HeatingQC" id="heatingqc" value="{{ request.form['HeatingQC'] }}">
                         <option value="Ex">Excellent</option>
                         <option value="Gd">Good</option>
                         <option value="TA">Average/Typical</option>
@@ -82,8 +210,8 @@
                     </select>
                 </div>
                 <div class="col-8 col-md-4">
-                    <label for="exterqual">Material Quality on Exterior</label>
-                    <select class="form-control" name="ExterQual" id="exterqual" value="{{ request.form['ExterQual'] }}" required>
+                    <label for="exterqual">Material Quality of Exterior</label>
+                    <select class="form-control" name="ExterQual" id="exterqual" value="{{ request.form['ExterQual'] }}">
                         <option value="Ex">Excellent</option>
                         <option value="Gd">Good</option>
                         <option value="TA">Average/Typical</option>
@@ -93,7 +221,7 @@
                 </div>
                 <div class="col-8 col-md-4">
                     <label for="lotshape">General Shape of Property</label>
-                    <select class="form-control" name="LotShape" id="lotshape" value="{{ request.form['LotShape'] }}" required>
+                    <select class="form-control" name="LotShape" id="lotshape" value="{{ request.form['LotShape'] }}">
                         <option value="Reg">Regular</option>
                         <option value="IR1">Slighlty Irregular</option>
                         <option value="IR2">Moderately Irregular</option>
@@ -102,18 +230,9 @@
                 </div>
             </div>          
 
-            <!-- Form Row 5 -->
+            <!-- Form Row 8 -->
             <div class="row mb-1">
-                <div class="col-4 p-0" >
-                    <label>Central Air Conditioning</label>
-                    <div class="radio-toolbar">
-                        <input type="radio" id="yes" name="CentralAir" value="Y" checked>
-                        <label for="yes">Yes</label>
-                        <input type="radio" id="no" name="CentralAir" value="N">
-                        <label for="no">No</label>
-                    </div>
-                </div>
-                <div class="col-4 p-0">
+                <div class="col-10 p-0 m-auto">
                     <label for="overallqual" class="form-label">Overall Quality & Finish</label><br>    
                     <span style="display: inline-flex; width: 100%;">
                         1
