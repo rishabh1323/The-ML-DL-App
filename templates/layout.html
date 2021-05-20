@@ -97,44 +97,51 @@
                     <a href="https://github.com/rishabh1323/The-ML-DL-App" id="dataset-button" 
                        target="_blank" rel="noopener noreferrer">
                         <div class="content-section px-1" style="padding-top: 0.6rem; padding-bottom: 0.6rem;"> 
-                            Get Complete Code <i class="fab fa-github-square fa-2x text-dark"></i>
+                            Get Complete Code <i class="fab fa-github-square fa-2x text-dark ml-2"></i>
                         </div>
                     </a>
                 </div>
                 {% if request.path not in ['', '/', '/home', '/about', '/machine-learning', '/deep-learning'] %}
+                <hr>
                 <a href="{{ data_dict.get('source_code_link') }}" id="source-code-button" class="github"
                    target="_blank" rel="noopener noreferrer">
                     <div class="content-section">
-                        Source Code <i class="fab fa-github fa-2x"></i>
+                        <i class="fab fa-github fa-2x"></i> Source Code
                     </div>
                 </a>
                 {% if data_dict.get(dataset_link) != "" %}
                 <a href="{{ data_dict.get('dataset_link') }}" id="dataset-button" class="kaggle"
                    target="_blank" rel="noopener noreferrer">
                     <div class="content-section">
-                        Find Dataset <i class="fab fa-kaggle"></i>
+                        <i class="fab fa-kaggle"></i> Find Dataset
                     </div>
                 </a>
                 {% endif %}
-                <div class="content-section text-center py-2" style="width: 100%;">
+                <div class="content-section text-center py-2" style="width: 100%; margin-top: 7.7rem;">
                     <h5 class="mt-1">Stats For Nerds</h5>
                     <hr>
-                    <p>
+                    {% for key in data_dict['stats_images_list'].keys() %}
+                    <p> 
                         <button class="content-section stats-button" type="button" data-toggle="collapse" 
-                                data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Statistics Button <i class="fas fa-caret-down ml-2"></i>
+                                data-target="#{{ key.split()[0] }}" aria-expanded="false" aria-controls="{{ key.split()[0] }}">
+                            {{ key }} <i class="fas fa-caret-down ml-2"></i>
                         </button>
                     </p> 
-                    <div class="collapse mt-0" id="collapseExample">
-                        <div class="mt-n3">    
-                          <img src="/static/use_case_images/stats_temp.png" class="stats-image">
+                    <div class="collapse mt-0" id="{{ key.split()[0] }}">
+                        <div class="mt-n3"> 
+                            {% for image_path in data_dict['stats_images_list'][key] %} 
+                            <img src="{{image_path}}" class="stats-image">
+                            {% endfor %}
                         </div>
                     </div>
+                    {% endfor %}        
                 </div>
                 {% endif %}
             </div>  
         </div>
     </main>
+
+    
 
     <!-- Page Footer -->
     <footer class="page-footer font-small mt-4">

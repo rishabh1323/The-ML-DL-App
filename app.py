@@ -42,14 +42,14 @@ def house_price_prediction():
         "source_code_link" : "https://github.com/rishabh1323/House-Price-Prediction",
         "dataset_link" : "https://www.kaggle.com/c/house-prices-advanced-regression-techniques",
         "stats_images_list" : {
-            "bar_plot" : [
+            "Bar Plots" : [
                 "/static/statistics_images/1_bar_1.png", "/static/statistics_images/1_bar_2.png",
                 "/static/statistics_images/1_bar_3.png", "/static/statistics_images/1_bar_4.png"
             ],
-            "scatter_plot" : [
+            "Scatter Plots" : [
                 "/static/statistics_images/1_scatter_1.png"
             ],
-            "distribution_plot" : [
+            "Distibution Plots" : [
                 "/static/statistics_images/1_dist_1.png", "/static/statistics_images/1_dist_2.png"
             ]
         }
@@ -63,14 +63,14 @@ def bank_note_authentication():
         "source_code_link" : "https://github.com/rishabh1323/Bank-Note-Authentication",
         "dataset_link" : "https://www.kaggle.com/ritesaluja/bank-note-authentication-uci-data",
         "stats_images_list" : {
-            "box_plot" : [
+            "Box Plots" : [
                 "/static/statistics_images/4_box_1.png", "/static/statistics_images/4_box_2.png",
                 "/static/statistics_images/4_box_3.png", "/static/statistics_images/4_box_4.png"
             ],
-            "count_plot" : [
+            "Count Plots" : [
                 "/static/statistics_images/4_count_1.png"
             ],
-            "distribution_plot" : [
+            "Distibution Plots" : [
                 "/static/statistics_images/4_dist_1.png", "/static/statistics_images/4_dist_2.png",
                 "/static/statistics_images/4_dist_3.png", "/static/statistics_images/4_dist_4.png"
             ]
@@ -85,18 +85,18 @@ def car_resale_value():
         "source_code_link" : "https://github.com/rishabh1323/Car-Resale-Value-Prediction",
         "dataset_link" : "https://www.kaggle.com/nehalbirla/vehicle-dataset-from-cardekho",
         "stats_images_list" : {
-            "bar_plot" : [
+            "Bar Plots" : [
                 "/static/statistics_images/5_bar_1.png", "/static/statistics_images/5_bar_2.png",
                 "/static/statistics_images/5_bar_3.png", "/static/statistics_images/5_bar_4.png"
             ],
-            "box_plot" : [
+            "Box Plots" : [
                 "/static/statistics_images/5_box_1.png", "/static/statistics_images/5_box_2.png",
                 "/static/statistics_images/5_box_3.png", "/static/statistics_images/5_box_4.png"
             ],
-            "scatter_plot" : [
+            "Scatter Plots" : [
                 "/static/statistics_images/5_scatter_1.png", "/static/statistics_images/5_scatter_2.png"
             ],
-            "distribution_plot" : [
+            "Distibution Plots" : [
                 "/static/statistics_images/5_dist_1.png", "/static/statistics_images/5_dist_2.png",
                 "/static/statistics_images/5_dist_3.png", "/static/statistics_images/5_dist_4.png"
             ]
