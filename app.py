@@ -1,9 +1,8 @@
 # Importing Required Libraries and Modules
 import pickle
-import sklearn
 import datetime
 import warnings
-from sklearn.preprocessing import MinMaxScaler, LabelEncoder
+from url_dict import url_dict
 from flask import Flask, render_template, redirect, url_for, request
 
 warnings.filterwarnings('ignore')
@@ -38,89 +37,28 @@ def deep_learning():
 
 # House Price Prediction Page
 @app.route("/house-price-prediction", methods=['GET', 'POST'])
-def house_price_prediction():
-    data_dict = {
-        "source_code_link" : "https://github.com/rishabh1323/House-Price-Prediction",
-        "dataset_link" : "https://www.kaggle.com/c/house-prices-advanced-regression-techniques",
-        "stats_images_list" : {
-            "Bar Plots" : [
-                "/static/statistics_images/1_bar_1.png", "/static/statistics_images/1_bar_2.png",
-                "/static/statistics_images/1_bar_3.png", "/static/statistics_images/1_bar_4.png"
-            ],
-            "Scatter Plots" : [
-                "/static/statistics_images/1_scatter_1.png"
-            ],
-            "Distibution Plots" : [
-                "/static/statistics_images/1_dist_1.png", "/static/statistics_images/1_dist_2.png"
-            ]
-        }
-    }    
-    return render_template("predict/house_price_prediction.html", data_dict=data_dict)
+def house_price_prediction():    
+    return render_template("predict/house_price_prediction.html", data_dict=url_dict['1'])
 
 # Bank Note Authentication Page
 @app.route("/bank-note-authentication", methods=['GET', 'POST'])
 def bank_note_authentication():
-    data_dict = {
-        "source_code_link" : "https://github.com/rishabh1323/Bank-Note-Authentication",
-        "dataset_link" : "https://www.kaggle.com/ritesaluja/bank-note-authentication-uci-data",
-        "stats_images_list" : {
-            "Box Plots" : [
-                "/static/statistics_images/4_box_1.png", "/static/statistics_images/4_box_2.png",
-                "/static/statistics_images/4_box_3.png", "/static/statistics_images/4_box_4.png"
-            ],
-            "Count Plots" : [
-                "/static/statistics_images/4_count_1.png"
-            ],
-            "Distibution Plots" : [
-                "/static/statistics_images/4_dist_1.png", "/static/statistics_images/4_dist_2.png",
-                "/static/statistics_images/4_dist_3.png", "/static/statistics_images/4_dist_4.png"
-            ]
-        }
-    }   
-    return render_template("predict/bank_note_authentication.html", data_dict=data_dict)
+    return render_template("predict/bank_note_authentication.html", data_dict=url_dict['4'])
 
 # Car Resale Value Page
 @app.route("/car-resale-value", methods=['GET', 'POST'])
 def car_resale_value():
-    data_dict = {
-        "source_code_link" : "https://github.com/rishabh1323/Car-Resale-Value-Prediction",
-        "dataset_link" : "https://www.kaggle.com/nehalbirla/vehicle-dataset-from-cardekho",
-        "stats_images_list" : {
-            "Bar Plots" : [
-                "/static/statistics_images/5_bar_1.png", "/static/statistics_images/5_bar_2.png",
-                "/static/statistics_images/5_bar_3.png", "/static/statistics_images/5_bar_4.png"
-            ],
-            "Box Plots" : [
-                "/static/statistics_images/5_box_1.png", "/static/statistics_images/5_box_2.png",
-                "/static/statistics_images/5_box_3.png", "/static/statistics_images/5_box_4.png"
-            ],
-            "Scatter Plots" : [
-                "/static/statistics_images/5_scatter_1.png", "/static/statistics_images/5_scatter_2.png"
-            ],
-            "Distibution Plots" : [
-                "/static/statistics_images/5_dist_1.png", "/static/statistics_images/5_dist_2.png",
-                "/static/statistics_images/5_dist_3.png", "/static/statistics_images/5_dist_4.png"
-            ]
-        }
-    }
-    return render_template("predict/car_resale_value.html", data_dict=data_dict)
+    return render_template("predict/car_resale_value.html", data_dict=url_dict['5'])
 
 # Digit Recognition Page
 @app.route("/digit-recognition", methods=['GET', 'POST'])
 def digit_recognition():
-    data_dict = {
-        "source_code_link" : "https://github.com/rishabh1323/Deep-Learning-Basic-Projects/blob/main/mnist_digit_recognizer.ipynb",
-        "dataset_link" : "https://www.kaggle.com/scolianni/mnistasjpg"
-    }
-    return render_template("predict/digit_recognition.html", data_dict=data_dict)
+    return render_template("predict/digit_recognition.html", data_dict=url_dict['2'])
 
 # Rock Paper Scissors Page
 @app.route("/rock-paper-scissors", methods=['GET', 'POST'])
 def rock_paper_scissors():
-    data_dict = {
-        "source_code_link" : "https://github.com/rishabh1323/Deep-Learning-Basic-Projects/blob/main/rock_paper_scissors.ipynb"
-    }
-    return render_template("predict/rock_paper_scissors.html", data_dict=data_dict)
+    return render_template("predict/rock_paper_scissors.html", data_dict=url_dict['3'])
 
 #################################
 ##### Routes for Prediction #####
@@ -175,13 +113,14 @@ def house_price_prediction_predict():
         HeatingQC = label_encoder_dict['HeatingQC'].transform([HeatingQC])[0]
         CentralAir = label_encoder_dict['CentralAir'].transform([CentralAir])[0]
         KitchenQual = label_encoder_dict['KitchenQual'].transform([KitchenQual])[0]
-        GarageFinish = label_encoder_dict['GarageType'].transform([GarageType])[0]
+        GarageType = label_encoder_dict['GarageType'].transform([GarageType])[0]
         GarageFinish = label_encoder_dict['GarageFinish'].transform([GarageFinish])[0]
         PavedDrive = label_encoder_dict['PavedDrive'].transform([PavedDrive])[0]
         
-        X_test = [MSZoning, LotShape, BldgType, OverallQual, YearRemodAdd, ExterQual, BsmtQual, BsmtExposure, BsmtFinType1, HeatingQC, 
-                  CentralAir , stFlrSF, GrLivArea, BsmtFullBath, KitchenQual, Fireplaces, GarageType, GarageFinish, GarageCars, PavedDrive]
-                    
+        X_test = [[MSZoning, LotShape, BldgType, OverallQual, YearRemodAdd, ExterQual, BsmtQual, BsmtExposure, BsmtFinType1, HeatingQC, 
+                  CentralAir , stFlrSF, GrLivArea, BsmtFullBath, KitchenQual, Fireplaces, GarageType, GarageFinish, GarageCars, PavedDrive]]
+
+        X_test = minmax_scaler.transform(X_test)  
 
         if Algorithm == 'linear_regressor':
             prediction = models[0].predict(X_test)[0]
@@ -192,8 +131,9 @@ def house_price_prediction_predict():
         else:
             prediction = models[3].predict(X_test)[0]
         
-        prediction_text = "The estimated price of the house is ${}".format(prediction*100000)
-        return render_template("predict/house_price_prediction.html", prediction_text=prediction_text, scroll='OutputPredictionText')
+        prediction_text = "The estimated price of the house is ${}".format(int(prediction*100000))
+        return render_template("predict/house_price_prediction.html", data_dict=url_dict['1'],
+                                prediction_text=prediction_text, scroll='OutputPredictionText')
     return redirect(url_for('house_price_prediction'))
 
 # Bank Note Authentication 
@@ -210,6 +150,7 @@ def bank_note_authentication_predict():
         Algorithm = request.form['Algorithm']
 
         X_test = [[Variance, Skewness, Curtosis, Entropy]]
+        X_test = standard_scaler.transform(X_test)
 
         if Algorithm == 'logistic_classifier':
             prediction = models[0].predict(X_test)[0]
@@ -223,7 +164,8 @@ def bank_note_authentication_predict():
         else:
             prediction_text = 'The bank note is authentic!'
 
-        return render_template("predict/bank_note_authentication.html", prediction_text=prediction_text, scroll='OutputPredictionText')
+        return render_template('predict/bank_note_authentication.html', data_dict=url_dict['4'],
+                                prediction_text=prediction_text, scroll='OutputPredictionText')
     return redirect(url_for('bank_note_authentication'))
 
 # Car Resale Value Prediction
@@ -262,7 +204,8 @@ def car_resale_value_predict():
         else:
             Transmission_Manual = 0
 
-        X_test = [[Present_Price, Kms_Driven, Num_Years, Fuel_Type_Diesel, Fuel_Type_Petrol, Seller_Type_Individual, Transmission_Manual]]
+        X_test = [[Present_Price, Kms_Driven, Num_Years, Fuel_Type_Diesel, Fuel_Type_Petrol, 
+                   Seller_Type_Individual, Transmission_Manual]]
 
         if Algorithm == 'linear_regressor':
             prediction = models[0].predict(X_test)[0]
@@ -276,7 +219,8 @@ def car_resale_value_predict():
         else:
             prediction_text = 'Your car can be sold for Rs {} Lakhs'.format(round(prediction, 2))
 
-        return render_template("predict/car_resale_value.html", prediction_text=prediction_text, scroll='OutputPredictionText')
+        return render_template('predict/car_resale_value.html', data_dict=url_dict['5'],
+                                prediction_text=prediction_text, scroll='OutputPredictionText')
     return redirect(url_for('car_resale_value'))
 
 # Initializing the Flask App

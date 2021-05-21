@@ -241,7 +241,8 @@
                     <label for="overallqual" class="form-label">Overall Quality & Finish</label><br>    
                     <span style="display: inline-flex; width: 100%;">
                         1
-                        <input type="range" class="form-range" name="OverallQual" min="1" max="10" step="1" id="overallqual">
+                        <input type="range" class="form-range" name="OverallQual" min="1" max="10" 
+                               value="{{ request.form['OverallQual'] }}" step="1" id="overallqual">
                         10
                     </span>
                 </div>
