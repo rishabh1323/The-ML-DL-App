@@ -41,13 +41,10 @@
                 <div class="col-8 col-md-6">
                     <label for="mszoning">General Zone Category</label>
                     <select class="form-control" name="MSZoning" id="mszoning" value="{{ request.form['MSZoning'] }}">
-                        <option value="A">Agricultural</option>
-                        <option value="C">Commercial</option>
+                        <option value="C (all)">Commercial</option>
                         <option value="FV">Floating Village Residential</option>
-                        <option value="I">Industrial</option>
                         <option value="RH">Residential High Density</option>
                         <option value="RL">Residential Low Density</option>
-                        <option value="RP">Residential Low Density Park</option>
                         <option value="RM">Residential Medium Density</option>
                     </select>
                 </div>
@@ -67,10 +64,10 @@
                     <label for="bldgtype">Building Type</label>
                     <select class="form-control" name="BldgType" id="bldgtype" value="{{ request.form['BldgType'] }}">
                         <option value="1Fam">Single-Family Detached</option>
-                        <option value="2FmCon">Two-Family Conversion</option>
-                        <option value="Duplx">Duplex</option>
+                        <option value="2fmCon">Two-Family Conversion</option>
+                        <option value="Duplex">Duplex</option>
                         <option value="TwnhsE">Townhouse End Unit</option>
-                        <option value="TwnhsI">Townhouse Inside Unit</option>
+                        <option value="Twnhs">Townhouse Inside Unit</option>
                     </select>
                 </div>
                 <div class="col-8 col-md-4">
@@ -89,7 +86,7 @@
                         <option value="Gd">Good</option>
                         <option value="TA">Average/Typical</option>
                         <option value="Fa">Fair</option>
-                        <option value="Po">Poor</option>
+                        <option value="Missing">Poor</option>
                     </select>
                 </div>
             </div>
@@ -104,8 +101,8 @@
                         <option value="BuiltIn">Built-In Garage</option>
                         <option value="CarPort">Car Port</option>
                         <option value="Detchd">Detached from Home</option>
-                        <option value="2types">More than 1 Type of Garage Present</option>
-                        <option value="NA">No Garage</option>
+                        <option value="2Types">More than 1 Type of Garage Present</option>
+                        <option value="Missing">No Garage</option>
                     </select>
                 </div>
                 <div class="col-8 col-md-6">
@@ -114,7 +111,7 @@
                         <option value="Fin">Finished</option>
                         <option value="RFn">Rough Finished</option>
                         <option value="Unf">Unfinished</option>
-                        <option value="NA">No Garage</option>
+                        <option value="Missing">No Garage</option>
                     </select>
                 </div>
             </div>
@@ -169,7 +166,7 @@
                         <option value="Av">Average Exposure</option>
                         <option value="Mn">Minimum Exposure</option>
                         <option value="No">No Exposure</option>
-                        <option value="NA">No Basement</option>
+                        <option value="Missing">No Basement</option>
                     </select>
                 </div>
                 <div class="col-8 col-md-4">
@@ -178,10 +175,10 @@
                         <option value="GLQ">Good Living Quarters</option>
                         <option value="ALQ">Average Living Quarters</option>
                         <option value="BLQ">Below Average Living Quarters</option>
-                        <option value="ReC">Average Recreation Room</option>
+                        <option value="Rec">Average Recreation Room</option>
                         <option value="LwQ">Low Quality</option>
                         <option value="Unf">Unfinished</option>
-                        <option value="NA">No Basement</option>
+                        <option value="Missing">No Basement</option>
                     </select>
                 </div>
                 <div class="col-8 col-md-4">
@@ -191,8 +188,8 @@
                         <option value="Gd">Good (90-99 inches)</option>
                         <option value="TA">Average/Typical (80-89 inches)</option>
                         <option value="Fa">Fair (70-79 inches)</option>
-                        <option value="Po">Poor (&lt;70 inches)</option>
-                        <option value="NA">No Basement</option>
+                        <option value="Missing">Poor (&lt;70 inches)</option>
+                        <option value="Missing">No Basement</option>
                     </select>
                 </div>
             </div>
@@ -216,7 +213,6 @@
                         <option value="Gd">Good</option>
                         <option value="TA">Average/Typical</option>
                         <option value="Fa">Fair</option>
-                        <option value="Po">Poor</option>
                     </select>
                 </div>
                 <div class="col-8 col-md-4">
@@ -228,9 +224,18 @@
                         <option value="IR3">Irregular</option>
                     </select>
                 </div>
-            </div>          
-
+            </div>  
+            
             <!-- Form Row 8 -->
+            <div class="row mb-5">
+                <div class="col-6 col-md-6 m-auto">
+                    <label for="yrsold">Year of Sale</label> 
+                    <input type="number" name="YrSold" id="yrsold" placeholder="Between 2006 and 2010" 
+                           value="{{ request.form['YrSold'] }}" min="2006" max="2010" step="1" required> 
+                </div>
+            </div>
+
+            <!-- Form Row 9 -->
             <div class="row mb-1">
                 <div class="col-10 p-0 m-auto">
                     <label for="overallqual" class="form-label">Overall Quality & Finish</label><br>    
