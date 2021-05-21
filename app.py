@@ -2,6 +2,7 @@
 import pickle
 import datetime
 import warnings
+import numpy as np
 from url_dict import url_dict
 from flask import Flask, render_template, redirect, url_for, request
 
@@ -72,8 +73,8 @@ def house_price_prediction_predict():
         minmax_scaler = pickle.load(open('saved_models/house_price_prediction/minmax_scaler.pkl', 'rb'))
         label_encoder_dict = pickle.load(open('saved_models/house_price_prediction/label_encoders.pkl', 'rb'))
 
-        GrLivArea = float(request.form['GrLivArea'])
-        stFlrSF = float(request.form['1stFlrSF'])
+        GrLivArea = np.log(float(request.form['GrLivArea']))
+        stFlrSF = np.log(float(request.form['1stFlrSF']))
         YearRemodAdd = int(request.form['YrSold']) - int(request.form['YearRemodAdd'])
         MSZoning = request.form['MSZoning']
         PavedDrive = request.form['PavedDrive']
@@ -102,6 +103,8 @@ def house_price_prediction_predict():
             ExterQual = 'Rare_Var'
         if HeatingQC == 'Po':
             HeatingQC = 'Rare_Var'
+        if GarageType == 'CarPort' or GarageType == '2Types':
+            GarageType = 'Rare_Var'
         
         MSZoning = label_encoder_dict['MSZoning'].transform([MSZoning])[0]
         LotShape = label_encoder_dict['LotShape'].transform([LotShape])[0]
@@ -117,8 +120,9 @@ def house_price_prediction_predict():
         GarageFinish = label_encoder_dict['GarageFinish'].transform([GarageFinish])[0]
         PavedDrive = label_encoder_dict['PavedDrive'].transform([PavedDrive])[0]
         
-        X_test = [[MSZoning, LotShape, BldgType, OverallQual, YearRemodAdd, ExterQual, BsmtQual, BsmtExposure, BsmtFinType1, HeatingQC, 
-                  CentralAir , stFlrSF, GrLivArea, BsmtFullBath, KitchenQual, Fireplaces, GarageType, GarageFinish, GarageCars, PavedDrive]]
+        X_test = [[MSZoning, LotShape, BldgType, OverallQual, YearRemodAdd, ExterQual, BsmtQual, BsmtExposure, 
+                   BsmtFinType1, HeatingQC, CentralAir , stFlrSF, GrLivArea, BsmtFullBath, KitchenQual, Fireplaces, 
+                   GarageType, GarageFinish, GarageCars, PavedDrive]]
 
         X_test = minmax_scaler.transform(X_test)  
 
@@ -131,7 +135,7 @@ def house_price_prediction_predict():
         else:
             prediction = models[3].predict(X_test)[0]
         
-        prediction_text = "The estimated price of the house is ${}".format(int(prediction*100000))
+        prediction_text = "The estimated price of the house is ${}".format(int(np.exp(prediction)))
         return render_template("predict/house_price_prediction.html", data_dict=url_dict['1'],
                                 prediction_text=prediction_text, scroll='OutputPredictionText')
     return redirect(url_for('house_price_prediction'))
