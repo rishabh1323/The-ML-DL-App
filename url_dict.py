@@ -6,13 +6,25 @@ url_dict = {
         "stats_images_list" : {
             "Bar Plots" : [
                 "/static/statistics_images/1_bar_1.png", "/static/statistics_images/1_bar_2.png",
-                "/static/statistics_images/1_bar_3.png", "/static/statistics_images/1_bar_4.png"
+                "/static/statistics_images/1_bar_3.png", "/static/statistics_images/1_bar_4.png",
+                "/static/statistics_images/1_bar_5.png", "/static/statistics_images/1_bar_6.png",
+                "/static/statistics_images/1_bar_7.png", "/static/statistics_images/1_bar_8.png",
+                "/static/statistics_images/1_bar_9.png", "/static/statistics_images/1_bar_10.png"
+            ],
+            "Box Plots" : [
+                "/static/statistics_images/1_box_1.png", "/static/statistics_images/1_box_2.png",
+                "/static/statistics_images/1_box_3.png", "/static/statistics_images/1_box_4.png",
+                "/static/statistics_images/1_box_5.png", "/static/statistics_images/1_box_6.png",
+                "/static/statistics_images/1_box_7.png", "/static/statistics_images/1_box_8.png",
+                "/static/statistics_images/1_box_9.png", "/static/statistics_images/1_box_10.png"
             ],
             "Scatter Plots" : [
-                "/static/statistics_images/1_scatter_1.png"
+                "/static/statistics_images/1_scatter_1.png", "/static/statistics_images/1_scatter_2.png",
+                "/static/statistics_images/1_scatter_3.png"
             ],
             "Distibution Plots" : [
-                "/static/statistics_images/1_dist_1.png", "/static/statistics_images/1_dist_2.png"
+                "/static/statistics_images/1_dist_1.png", "/static/statistics_images/1_dist_2.png",
+                "/static/statistics_images/1_dist_3.png"
             ]
         }
     },
