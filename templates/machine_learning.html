@@ -1,9 +1,55 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<!-- Introduction Paragraph -->
 <div>
-    <p class="m-0">Let's explore some real-world problems and predict some cool things with Machine Learning algorithms.</p>
+    <h3>Hi!</h3>
+    <p class="m-0">Welcome to this awesome machine learning web application.</p>
+    <p class="m-0">Explore various problem statements and start predicting with your favourite model right away!</p>
     <hr>
+</div>
+
+<div style="display: inline-flexbox;">
+    <!-- House Price Prediction Bootstrap Card -->
+    <div class="card mt-2 mb-2" style="width: 100%; padding: 0.5%; background-color: #fafafa; text-align: justify;">
+        <img src="static\use_case_images\1_1.png" class="card-img-top">
+        <div class="card-body" >
+            <h5 class="card-title">House Price Prediction</h5>
+            <p class="card-text">
+                Predict an estimated price for your next dream house based on its features using regression models.
+                Select from over 20 features and predict using Linear Regression, Random Forest Regression, XGBoost 
+                Regression and more.
+            </p>
+            <a href="{{ url_for('house_price_prediction') }}" class="btn btn-primary" style="opacity: 0.9;">Start Predicting</a>
+        </div>
+    </div>
+
+    <!-- Bank Note Authentication Bootstrap Card -->
+    <div class="card mt-2 mb-2" style="width: 49%; padding: 0.5%; background-color: #fafafa; text-align: justify; float: left;">
+        <img src="static\use_case_images\4_1.jpg" class="card-img-top">
+        <div class="card-body" >
+            <h5 class="card-title">Bank Note Authentication</h5>
+            <p class="card-text">
+                Predict whether your bank note is authentic or not! Explain certain features of the bank note and
+                predict using classification models like Logistic Regression, Random Forest Classifier and more.
+            </p>
+            <a href="{{ url_for('bank_note_authentication') }}" class="btn btn-primary" style="opacity: 0.9;">Start Predicting</a>
+        </div>
+    </div>
+
+    <!-- Car Resale Value Bootstrap Card -->
+    <div class="card mt-2 mb-2" style="width: 49%; padding: 0.5%; background-color: #fafafa; text-align: justify; float: right;">
+        <img src="static\use_case_images\5_1.jpg" class="card-img-top">
+        <div class="card-body" >
+            <h5 class="card-title">Car Resale Value</h5>
+            <p class="card-text">
+                Get to know the resale value for you car right away! Enter few details about the car like fuel type, transmission 
+                and more to predict using regression models like Linear Regression, Random Forest Regression, XGBoost Regression
+                and more.
+            </p>
+            <a href="{{ url_for('car_resale_value') }}" class="btn btn-primary" style="opacity: 0.9;">Start Predicting</a>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

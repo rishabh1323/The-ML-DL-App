@@ -1,9 +1,40 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<!-- Introduction Paragraph -->
 <div>
-    <p class="m-0">Let's dive into some real-world problems and solve them using Deep Learning algorithms.</p>
+    <h3>Hi!</h3>
+    <p class="m-0">Welcome to this awesome machine learning web application.</p>
+    <p class="m-0">Explore various problem statements and start predicting with your favourite model right away!</p>
     <hr>
+</div>
+
+<div style="display: inline-flexbox;">
+    <!-- Handwritten Digit Recognition Bootstrap Card -->
+    <div class="card mt-2 mb-2" style="width: 49%; padding: 0.5%; background-color: #fafafa; text-align: justify; float: left;">
+        <img src="static\use_case_images\2_1.jpg" class="card-img-top">
+        <div class="card-body" >
+            <h5 class="card-title">Digit Recognition</h5>
+            <p class="card-text">
+                Start exploring the world of deep learning! Use neural networks to recognize a handwritten digit from an image.
+                How cool is that, right? Predict the handwritten digit with utmost accuracy, right away. 
+            </p>
+            <a href="{{ url_for('digit_recognition') }}" class="btn btn-primary" style="opacity: 0.9;">Start Predicting</a>
+        </div>
+    </div>
+
+    <!-- Rock Paper Scissors Bootstrap Card -->
+    <div class="card mt-2 mb-2" style="width: 49%; padding: 0.5%; background-color: #fafafa; text-align: justify; float: right;">
+        <img src="static\use_case_images\3_1.png" class="card-img-top">
+        <div class="card-body" >
+            <h5 class="card-title">Rock Paper Scissors</h5>
+            <p class="card-text">
+                Let's dive deeper into deep learning! Make predictions for the Rock-Paper-Scissors game, recognize the playing
+                action from an image of a hand.  
+            </p>
+            <a href="{{ url_for('rock_paper_scissors') }}" class="btn btn-primary" style="opacity: 0.9;">Start Predicting</a>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
