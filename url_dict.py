@@ -31,7 +31,29 @@ url_dict = {
     # Digit Recognition
     '2' : {
         "source_code_link" : "https://github.com/rishabh1323/Deep-Learning-Basic-Projects/blob/main/mnist_digit_recognizer.ipynb",
-        "dataset_link" : "https://www.kaggle.com/scolianni/mnistasjpg"
+        "dataset_link" : "https://www.kaggle.com/scolianni/mnistasjpg",
+        "stats_images_list" : {
+            "Graphs" : [
+                "/static/statistics_images/2_graph_1.png", "/static/statistics_images/2_graph_2.png"
+            ],
+            "Scalars" : [
+                "/static/statistics_images/2_scalar_1.png", "/static/statistics_images/2_scalar_1.png"
+            ],
+            "Distributions" : [
+                "/static/statistics_images/2_dist_1.png", "/static/statistics_images/2_dist_2.png",
+                "/static/statistics_images/2_dist_3.png", "/static/statistics_images/2_dist_4.png",
+                "/static/statistics_images/2_dist_5.png", "/static/statistics_images/2_dist_6.png",
+                "/static/statistics_images/2_dist_7.png", "/static/statistics_images/2_dist_8.png",
+                "/static/statistics_images/2_dist_9.png", "/static/statistics_images/2_dist_10.png"
+            ],
+            "Histograms" : [
+                "/static/statistics_images/2_hist_1.png", "/static/statistics_images/2_hist_2.png",
+                "/static/statistics_images/2_hist_3.png", "/static/statistics_images/2_hist_4.png",
+                "/static/statistics_images/2_hist_5.png", "/static/statistics_images/2_hist_6.png",
+                "/static/statistics_images/2_hist_7.png", "/static/statistics_images/2_hist_8.png",
+                "/static/statistics_images/2_hist_9.png", "/static/statistics_images/2_hist_10.png"
+            ]
+        }
     },
     # Rock Paper Scissors
     '3' : {
