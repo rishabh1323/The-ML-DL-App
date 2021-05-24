@@ -30,7 +30,7 @@ url_dict = {
     },
     # Digit Recognition
     '2' : {
-        "source_code_link" : "https://github.com/rishabh1323/Deep-Learning-Basic-Projects/blob/main/mnist_digit_recognizer.ipynb",
+        "source_code_link" : "https://github.com/rishabh1323/Deep-Learning-Basic-Projects/tree/main/MNIST%20Digit%20Recognition",
         "dataset_link" : "https://www.kaggle.com/scolianni/mnistasjpg",
         "stats_images_list" : {
             "Graphs" : [
@@ -57,7 +57,7 @@ url_dict = {
     },
     # Rock Paper Scissors
     '3' : {
-        "source_code_link" : "https://github.com/rishabh1323/Deep-Learning-Basic-Projects/blob/main/rock_paper_scissors.ipynb"
+        "source_code_link" : "https://github.com/rishabh1323/Deep-Learning-Basic-Projects/tree/main/Rock%20Paper%20Scissors"
     },
     # Bank Note Authentication
     '4' : {

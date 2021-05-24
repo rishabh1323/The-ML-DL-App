@@ -1,9 +1,14 @@
 # Importing Required Libraries and Modules
+import os
 import pickle
+import shutil
+import requests
 import datetime
 import warnings
 import numpy as np
+import tensorflow as tf
 from url_dict import url_dict
+from tensorflow.keras.preprocessing import image
 from flask import Flask, render_template, redirect, url_for, request
 
 warnings.filterwarnings('ignore')
@@ -226,6 +231,31 @@ def car_resale_value_predict():
         return render_template('predict/car_resale_value.html', data_dict=url_dict['5'],
                                 prediction_text=prediction_text, scroll='OutputPredictionText')
     return redirect(url_for('car_resale_value'))
+
+# Digit Recognition
+@app.route("/digit-recognition/predict", methods=['GET', 'POST'])
+def digit_recognition_predict():
+    if request.method == 'POST':
+        model = tf.keras.models.load_model('saved_models/digit_recognition/saved_model/my_model')
+        
+        image_url = request.form['ImageUploadURL']
+        r = requests.get(image_url, stream=True, headers={'User-agent': 'Mozilla/5.0'})
+        if r.status_code == 200:
+            with open("image.png", 'wb') as f:
+                r.raw.decode_content = True
+                shutil.copyfileobj(r.raw, f)
+
+        img = image.load_img("image.png", target_size=(28, 28))
+        os.remove("image.png")
+        x = image.img_to_array(img)
+        x = np.expand_dims(x, axis=0)
+
+        classes = model.predict(x, batch_size=1)
+        prediction_text = "The predicted digit is {}".format(np.argmax(classes))
+        return render_template('predict/digit_recognition.html', data_dict=url_dict['5'],
+                                prediction_text=prediction_text, scroll='OutputPredictionText')
+    return redirect(url_for('digit_recognition'))
+
 
 # Initializing the Flask App
 if __name__ == '__main__':
