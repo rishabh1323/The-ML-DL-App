@@ -1,6 +1,82 @@
 {% extends "layout.html" %}
 {% block content %}
+
+<!-- Custom CSS for Form -->
+<link rel="stylesheet" href="/static/form.css">
+
+<!-- Poster and Heading -->
+<div class="text-center">
     
-    <img src="/static/use_case_images/3_1.png" alt="">
+    <img src="/static/use_case_images/3_2.png" style="width: 100%; box-shadow: 3px 3px 5px 1px lightslategray;"> 
+    <hr>
+    <h1 class="mt-4">Rock Paper Scissors</h1>
+</div>
+
+<!-- Data Input Form -->
+<form action="{{ url_for('rock_paper_scissors_predict') }}" method="post">
+    <div class="card rounded-0 mt-5 content-center p-5 " style="display: inline-flexbox;">
+        <div class="form-card text-center">
+            
+            <h4 class="mb-4">Ground Truth Class Labels</h4>
+            <div class="row">
+                <div class="col-8 col-md-4">
+                    <img src="/static/use_case_images/3_3.png" style="width: 75%; height: 8rem;" class="mb-2">
+                    <div>Rock</div>
+                </div>
+                <div class="col-8 col-md-4">
+                    <img src="/static/use_case_images/3_4.png" style="width: 75%; height: 8rem;" class="mb-2">
+                    <div>Paper</div>
+                </div>
+                <div class="col-8 col-md-4">
+                    <img src="/static/use_case_images/3_4.png" style="width: 75%; height: 8rem;" class="mb-2">
+                    <div>Scissor</div>
+                </div>
+            </div> 
+    
+            <div class="row mt-4">
+                <div class="col-8 col-md-9 m-auto">
+                    <!-- <div class="file-upload-wrapper">
+                        <label for="image-upload">Upload Your Own Digit Image</label>
+                        <input type="file" name="ImageUpload" id="image-upload" value="{{ request.form['ImageUpload'] }}"
+                               class="file-upload" accept="image/*" />
+                    </div>
+                    <h4 class="mt-n1">OR</h4> -->
+                    <div class="mt-3">
+                        <label for="image-upload-url">Enter Image URL</label>
+                        <input type="url" name="ImageUploadURL" id="image-upload-url" placeholder="Enter Image URL"
+                               value="{{ request.form['ImageUploadURL'] }}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4 m-auto">
+                    <img src="{{ request.form['ImageUploadURL'] }}" alt="" style="width: 100%;">
+                </div>
+            </div>
+            
+
+            <!-- Form Submit Button -->
+            <div class="row">
+                <div class="col-md-6 m-auto mt-3 pt-3"> 
+                    <input type="submit" class="btn btn-info" value="Predict" 
+                    style="font-size: large; color: aliceblue; font-weight: bold;"> 
+                </div>
+            </div>
+
+            <!-- Output Prediction Text -->
+            <div id="OutputPredictionText">
+                <h5 class="text-center">{{ prediction_text }}</h5>
+                {% if scroll %}
+                <script>
+                    document.getElementById('{{ scroll }}').scrollIntoView();
+                    // document.location.hash = '#' + '{{ scroll }}';
+                </script>
+                {% endif %}
+            </div>
+            
+        </div>
+    </div>
+</form>
 
 {% endblock %}

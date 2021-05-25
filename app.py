@@ -252,9 +252,40 @@ def digit_recognition_predict():
 
         classes = model.predict(x, batch_size=1)
         prediction_text = "The predicted digit is {}".format(np.argmax(classes))
-        return render_template('predict/digit_recognition.html', data_dict=url_dict['5'],
+        return render_template('predict/digit_recognition.html', data_dict=url_dict['2'],
                                 prediction_text=prediction_text, scroll='OutputPredictionText')
     return redirect(url_for('digit_recognition'))
+
+# Rock Paper Scissors
+@app.route("/rock-paper-scissors/predict", methods=['GET', 'POST'])
+def rock_paper_scissors_predict():
+    if request.method == 'POST':
+        model = tf.keras.models.load_model('saved_models/rock_paper_scissors/saved_model/my_model')
+        
+        image_url = request.form['ImageUploadURL']
+        r = requests.get(image_url, stream=True, headers={'User-agent': 'Mozilla/5.0'})
+        if r.status_code == 200:
+            with open("image.png", 'wb') as f:
+                r.raw.decode_content = True
+                shutil.copyfileobj(r.raw, f)
+
+        img = image.load_img("image.png", target_size=(150, 150))
+        os.remove("image.png")
+        x = image.img_to_array(img)
+        x = np.expand_dims(x, axis=0)
+
+        classes = model.predict(x, batch_size=1)[0]
+        if classes[0] == 1.:
+            predicted_class = "Paper"
+        elif classes[1] == 1.:
+            predicted_class = "Rock"
+        else:
+            predicted_class = "Scissor"
+
+        prediction_text = "The predicted action is {}!".format(predicted_class)
+        return render_template('predict/rock_paper_scissors.html', data_dict=url_dict['3'],
+                                prediction_text=prediction_text, scroll='OutputPredictionText')
+    return redirect(url_for('rock_paper_scissors'))
 
 
 # Initializing the Flask App
