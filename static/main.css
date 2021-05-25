@@ -242,8 +242,9 @@ footer {
 }
 
 .stats-image:hover {
-    border: 1px solid slategray;
+    border: 1px solid darkslategray;
     transform: scale(4) translateX(-5rem) ;
     box-shadow: 2px 2px 10px 0.1px black;
+    background-color: white;
     z-index: 2;
 }

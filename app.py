@@ -1,5 +1,6 @@
 # Importing Required Libraries and Modules
 import os
+import base64
 import pickle
 import shutil
 import requests
@@ -239,6 +240,7 @@ def digit_recognition_predict():
         model = tf.keras.models.load_model('saved_models/digit_recognition/saved_model/my_model')
         
         image_url = request.form['ImageUploadURL']
+
         r = requests.get(image_url, stream=True, headers={'User-agent': 'Mozilla/5.0'})
         if r.status_code == 200:
             with open("image.png", 'wb') as f:
@@ -248,7 +250,7 @@ def digit_recognition_predict():
         img = image.load_img("image.png", target_size=(28, 28))
         os.remove("image.png")
         x = image.img_to_array(img)
-        x = np.expand_dims(x, axis=0)
+        x = np.expand_dims(x/255.0, axis=0)
 
         classes = model.predict(x, batch_size=1)
         prediction_text = "The predicted digit is {}".format(np.argmax(classes))
@@ -272,7 +274,7 @@ def rock_paper_scissors_predict():
         img = image.load_img("image.png", target_size=(150, 150))
         os.remove("image.png")
         x = image.img_to_array(img)
-        x = np.expand_dims(x, axis=0)
+        x = np.expand_dims(x/255.0, axis=0)
 
         classes = model.predict(x, batch_size=1)[0]
         if classes[0] == 1.:
@@ -283,6 +285,8 @@ def rock_paper_scissors_predict():
             predicted_class = "Scissor"
 
         prediction_text = "The predicted action is {}!".format(predicted_class)
+        del predicted_class
+        del classes
         return render_template('predict/rock_paper_scissors.html', data_dict=url_dict['3'],
                                 prediction_text=prediction_text, scroll='OutputPredictionText')
     return redirect(url_for('rock_paper_scissors'))
