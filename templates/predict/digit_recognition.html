@@ -55,18 +55,22 @@
                     <h4 class="mt-n1">OR</h4> -->
                     <div class="mt-3">
                         <label for="image-upload-url" class="mb-n4">Enter Image URL</label>
-                        <br><small>(Use clear images with only a single digit for best results)</small>
+                        <br><small>(Use clear images for best results)</small>
                         <input type="url" name="ImageUploadURL" id="image-upload-url" placeholder="Enter Image URL"
                                value="{{ request.form['ImageUploadURL'] }}" class="mt-3" required>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
+            {% if prediction_text %}
+            <div class="row mb-2">
                 <div class="col-4 m-auto">
-                    <img src="{{ request.form['ImageUploadURL'] }}" alt="" style="width: 100%;">
+                    <img src="data:image/png;base64,{{ prediction_text['contour_image'] }}" alt="" 
+                         style="width: 100%; border: 1px solid black;">
+                    <small>Detected Contours</small>
                 </div>
             </div>
+            {% endif %}
             
 
             <!-- Form Submit Button -->
@@ -78,8 +82,17 @@
             </div>
 
             <!-- Output Prediction Text -->
-            <div id="OutputPredictionText">
-                <h5 class="text-center">{{ prediction_text }}</h5>
+            {% if prediction_text %}
+            <h4>Recognized Digits</h4>
+            <div id="OutputPredictionText" class="mt-4 d-flex justify-content-around">
+                {% for i in range(prediction_text['digit_image']|length) %}
+                <div>
+                    <img src="data:image/png;base64,{{ prediction_text['digit_image'][i] }}" alt="" 
+                    style="width: 4rem; height: 4rem;">
+                    <br>
+                    <h6 class="text-center mt-1">Prediction: {{ prediction_text['digit_value'][i] }}</h6>
+                </div>
+                {% endfor %}
                 {% if scroll %}
                 <script>
                     document.getElementById('{{ scroll }}').scrollIntoView();
@@ -87,6 +100,7 @@
                 </script>
                 {% endif %}
             </div>
+            {% endif %}
             
         </div>
     </div>

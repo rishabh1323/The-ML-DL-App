@@ -1,5 +1,6 @@
 # Importing Required Libraries and Modules
 import os
+import cv2
 import base64
 import pickle
 import shutil
@@ -240,22 +241,52 @@ def digit_recognition_predict():
         model = tf.keras.models.load_model('saved_models/digit_recognition/saved_model/my_model')
         
         image_url = request.form['ImageUploadURL']
-
         r = requests.get(image_url, stream=True, headers={'User-agent': 'Mozilla/5.0'})
         if r.status_code == 200:
-            with open("image.png", 'wb') as f:
+            with open('image.png', 'wb') as f:
                 r.raw.decode_content = True
                 shutil.copyfileobj(r.raw, f)
 
-        img = image.load_img("image.png", target_size=(28, 28))
-        os.remove("image.png")
-        x = image.img_to_array(img)
-        x = np.expand_dims(x/255.0, axis=0)
+        img = cv2.imread('image.png')
+        os.remove('image.png')
+        grey = cv2.cvtColor(img.copy(), cv2.COLOR_BGR2GRAY)
+        ret, thresh = cv2.threshold(grey.copy(), 75, 255, cv2.THRESH_BINARY_INV)
+        contours, _ = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        preprocessed_digits = []
 
-        classes = model.predict(x, batch_size=1)
-        prediction_text = "The predicted digit is {}".format(np.argmax(classes))
+        for c in contours:
+            x, y, w, h = cv2.boundingRect(c)
+            if w*h < grey.shape[1]*grey.shape[0]*0.001:
+                continue
+            cv2.rectangle(img, (x,y), (x+w, y+h), color=(0, 255, 0), thickness=5)
+            digit = thresh[y:y+h, x:x+w]
+            if np.min(digit.reshape(-1)) == np.max(digit.reshape(-1)):
+                continue
+            resized_digit = cv2.resize(digit, (18,18))
+            padded_digit = np.pad(resized_digit, ((5,5),(5,5)), 'constant', constant_values=0)
+            preprocessed_digits.append(padded_digit)
+        
+        _, im_arr = cv2.imencode('.png', img) 
+        im_bytes = im_arr.tobytes()
+        contour_image_data = base64.b64encode(im_bytes).decode('utf-8')
+        pred = {
+            'contour_image' : contour_image_data,
+            'digit_image' : [],
+            'digit_value' : []
+        }
+
+        for digit in preprocessed_digits:
+            prediction = model.predict(digit.reshape(1, 28, 28, 1))
+
+            _, im_arr = cv2.imencode('.png', digit.reshape(28, 28)) 
+            im_bytes = im_arr.tobytes()
+            digit_image_data = base64.b64encode(im_bytes).decode('utf-8')
+            pred['digit_image'].append(digit_image_data)
+            pred['digit_value'].append(np.argmax(prediction))
+        
+        prediction_text = pred
         return render_template('predict/digit_recognition.html', data_dict=url_dict['2'],
-                                prediction_text=prediction_text, scroll='OutputPredictionText')
+                                prediction_text=pred, scroll='OutputPredictionText')
     return redirect(url_for('digit_recognition'))
 
 # Rock Paper Scissors
