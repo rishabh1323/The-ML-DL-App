@@ -37,7 +37,7 @@ url_dict = {
                 "/static/statistics_images/2_graph_1.png", "/static/statistics_images/2_graph_2.png"
             ],
             "Scalars" : [
-                "/static/statistics_images/2_scalar_1.png", "/static/statistics_images/2_scalar_1.png"
+                "/static/statistics_images/2_scalar_1.png", "/static/statistics_images/2_scalar_2.png"
             ],
             "Distributions" : [
                 "/static/statistics_images/2_dist_1.png", "/static/statistics_images/2_dist_2.png",
