@@ -44,27 +44,27 @@ def deep_learning():
     return render_template("deep_learning.html")
 
 # House Price Prediction Page
-@app.route("/house-price-prediction", methods=['GET', 'POST'])
+@app.route("/machine-learning/house-price-prediction", methods=['GET', 'POST'])
 def house_price_prediction():    
     return render_template("predict/house_price_prediction.html", data_dict=url_dict['1'])
 
 # Bank Note Authentication Page
-@app.route("/bank-note-authentication", methods=['GET', 'POST'])
+@app.route("/machine-learning/bank-note-authentication", methods=['GET', 'POST'])
 def bank_note_authentication():
     return render_template("predict/bank_note_authentication.html", data_dict=url_dict['4'])
 
 # Car Resale Value Page
-@app.route("/car-resale-value", methods=['GET', 'POST'])
+@app.route("/machine-learning/car-resale-value", methods=['GET', 'POST'])
 def car_resale_value():
     return render_template("predict/car_resale_value.html", data_dict=url_dict['5'])
 
 # Digit Recognition Page
-@app.route("/digit-recognition", methods=['GET', 'POST'])
+@app.route("/deep-learning/digit-recognition", methods=['GET', 'POST'])
 def digit_recognition():
     return render_template("predict/digit_recognition.html", data_dict=url_dict['2'])
 
 # Rock Paper Scissors Page
-@app.route("/rock-paper-scissors", methods=['GET', 'POST'])
+@app.route("/deep-learning/rock-paper-scissors", methods=['GET', 'POST'])
 def rock_paper_scissors():
     return render_template("predict/rock_paper_scissors.html", data_dict=url_dict['3'])
 
@@ -73,7 +73,7 @@ def rock_paper_scissors():
 #################################
 
 # House Price Prediction
-@app.route("/house-price-prediction/predict", methods=['GET', 'POST'])
+@app.route("/machine-learning/house-price-prediction/predict", methods=['GET', 'POST'])
 def house_price_prediction_predict():
     if request.method == 'POST':
         models = pickle.load(open('saved_models/house_price_prediction/models.pkl', 'rb'))
@@ -148,7 +148,7 @@ def house_price_prediction_predict():
     return redirect(url_for('house_price_prediction'))
 
 # Bank Note Authentication 
-@app.route("/bank-note-authentication/predict", methods=['GET', 'POST'])
+@app.route("/machine-learning/bank-note-authentication/predict", methods=['GET', 'POST'])
 def bank_note_authentication_predict():
     if request.method == 'POST':
         models = pickle.load(open('saved_models/bank_note_authentication/models.pkl', 'rb'))
@@ -180,7 +180,7 @@ def bank_note_authentication_predict():
     return redirect(url_for('bank_note_authentication'))
 
 # Car Resale Value Prediction
-@app.route("/car-resale-value/predict", methods=['GET', 'POST'])
+@app.route("/machine-learning/car-resale-value/predict", methods=['GET', 'POST'])
 def car_resale_value_predict():
     if request.method == 'POST':
         models = pickle.load(open('saved_models/car_resale_value/models.pkl', 'rb'))
@@ -235,7 +235,7 @@ def car_resale_value_predict():
     return redirect(url_for('car_resale_value'))
 
 # Digit Recognition
-@app.route("/digit-recognition/predict", methods=['GET', 'POST'])
+@app.route("/deep-learning/digit-recognition/predict", methods=['GET', 'POST'])
 def digit_recognition_predict():
     if request.method == 'POST':
         model = tf.keras.models.load_model('saved_models/digit_recognition/saved_model/my_model')
@@ -249,22 +249,31 @@ def digit_recognition_predict():
 
         img = cv2.imread('image.png')
         os.remove('image.png')
-        grey = cv2.cvtColor(img.copy(), cv2.COLOR_BGR2GRAY)
-        ret, thresh = cv2.threshold(grey.copy(), 75, 255, cv2.THRESH_BINARY_INV)
-        contours, _ = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         preprocessed_digits = []
 
-        for c in contours:
-            x, y, w, h = cv2.boundingRect(c)
-            if w*h < grey.shape[1]*grey.shape[0]*0.001:
-                continue
-            cv2.rectangle(img, (x,y), (x+w, y+h), color=(0, 255, 0), thickness=5)
-            digit = thresh[y:y+h, x:x+w]
-            if np.min(digit.reshape(-1)) == np.max(digit.reshape(-1)):
-                continue
-            resized_digit = cv2.resize(digit, (18,18))
-            padded_digit = np.pad(resized_digit, ((5,5),(5,5)), 'constant', constant_values=0)
-            preprocessed_digits.append(padded_digit)
+        print("***********************")
+        print(img.shape)
+        print("***********************")
+
+        if img.shape != (28, 28, 3):
+            grey = cv2.cvtColor(img.copy(), cv2.COLOR_BGR2GRAY)
+            ret, thresh = cv2.threshold(grey.copy(), 75, 255, cv2.THRESH_BINARY_INV)
+            contours, _ = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+            for c in contours:
+                x, y, w, h = cv2.boundingRect(c)
+                if w*h < grey.shape[1]*grey.shape[0]*0.001:
+                    continue
+                cv2.rectangle(img, (x,y), (x+w, y+h), color=(0, 255, 0), thickness=5)
+                digit = thresh[y:y+h, x:x+w]
+                if np.min(digit.reshape(-1)) == np.max(digit.reshape(-1)):
+                    continue
+                resized_digit = cv2.resize(digit, (18,18))
+                padded_digit = np.pad(resized_digit, ((5,5),(5,5)), 'constant', constant_values=0)
+                preprocessed_digits.append(padded_digit)
+        else:
+            img = cv2.cvtColor(img.copy(), cv2.COLOR_BGR2GRAY)
+            preprocessed_digits.append(img)
         
         _, im_arr = cv2.imencode('.png', img) 
         im_bytes = im_arr.tobytes()
@@ -284,13 +293,12 @@ def digit_recognition_predict():
             pred['digit_image'].append(digit_image_data)
             pred['digit_value'].append(np.argmax(prediction))
         
-        prediction_text = pred
         return render_template('predict/digit_recognition.html', data_dict=url_dict['2'],
                                 prediction_text=pred, scroll='OutputPredictionText')
     return redirect(url_for('digit_recognition'))
 
 # Rock Paper Scissors
-@app.route("/rock-paper-scissors/predict", methods=['GET', 'POST'])
+@app.route("/deep-learning/rock-paper-scissors/predict", methods=['GET', 'POST'])
 def rock_paper_scissors_predict():
     if request.method == 'POST':
         model = tf.keras.models.load_model('saved_models/rock_paper_scissors/saved_model/my_model')

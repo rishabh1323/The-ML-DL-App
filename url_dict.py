@@ -32,6 +32,7 @@ url_dict = {
     '2' : {
         "source_code_link" : "https://github.com/rishabh1323/Deep-Learning-Basic-Projects/tree/main/MNIST%20Digit%20Recognition",
         "dataset_link" : "https://www.kaggle.com/scolianni/mnistasjpg",
+        "test_images_link" : "",
         "stats_images_list" : {
             "Graphs" : [
                 "/static/statistics_images/2_graph_1.png", "/static/statistics_images/2_graph_2.png"
