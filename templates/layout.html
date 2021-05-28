@@ -109,6 +109,7 @@
                         <i class="fab fa-github fa-2x"></i> Source Code
                     </div>
                 </a>
+                
                 {% if data_dict.get(dataset_link) != "" %}
                 <a href="{{ data_dict.get('dataset_link') }}" id="dataset-button" class="kaggle"
                    target="_blank" rel="noopener noreferrer">
@@ -118,9 +119,17 @@
                 </a>
                 {% endif %}
 
-                
+                {% if data_dict.get('test_images_link') %}
+                <a href="{{ data_dict.get('test_images_link') }}" id="test-image-button"
+                   target="_blank" rel="noopener noreferrer">
+                    <div class="content-section">
+                        Find Some Test Images
+                    </div>
+                </a>
+                {% endif %}
+
                 {% if data_dict['stats_images_list'] %}
-                <div class="content-section text-center py-2 mt-5" style="width: 100%;">
+                <div class="content-section text-center py-2 mt-2" style="width: 100%;">
                     <h5 class="mt-1">Stats For Nerds</h5>
                     <hr>
                     {% for key in data_dict['stats_images_list'].keys() %}

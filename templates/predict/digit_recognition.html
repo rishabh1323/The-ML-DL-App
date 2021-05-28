@@ -45,6 +45,7 @@
                 </div>
             </div>  
     
+            <!-- Input URL Box -->
             <div class="row mt-4">
                 <div class="col-8 col-md-9 m-auto">
                     <!-- <div class="file-upload-wrapper">
@@ -62,6 +63,7 @@
                 </div>
             </div>
 
+            <!-- Input Image with Contours (if any) -->
             {% if prediction_text %}
             <div class="row mb-2">
                 <div class="col-4 m-auto">
@@ -82,7 +84,7 @@
 
             <!-- Output Prediction Text -->
             {% if prediction_text %}
-            <h4>Recognized Digits</h4>
+            <h4 class="mt-2">Recognized Digits</h4>
             <div id="OutputPredictionText" class="mt-4 d-flex justify-content-around">
                 {% for i in range(prediction_text['digit_image']|length) %}
                 <div>
