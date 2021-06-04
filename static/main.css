@@ -103,6 +103,12 @@ a.article-title:hover {
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
 }
+
+@media screen and (max-width: 850px) {
+    .icon-bar {
+       display: None;
+    }
+ }
   
 .icon-bar a {
     display: block;
