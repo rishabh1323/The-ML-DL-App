@@ -1,0 +1,277 @@
+body {
+    /* background-color: #b8c6db;
+    background-image: linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%); */
+    background-color: #ffffff;
+    background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%);
+    background-attachment: fixed;
+    color: #333333;
+    margin-top: 5rem;
+}
+  
+h1, h2, h3, h4, h5, h6 {
+    color: #444444;
+}
+  
+.bg-steel {
+    background-color: #36096D;
+    background-image: linear-gradient(45deg, #36096D 0%, #37D5D6 74%);
+}
+  
+.site-header .navbar-nav .nav-link {
+    color: #ffffff;
+    font-stretch: expanded;
+}
+  
+.site-header .navbar-nav .nav-link:hover {
+    color: #ddd2d2;
+    transition: all 0.5s ease-in-out;
+}
+  
+.site-header .navbar-nav .nav-link.active {
+    font-weight: 500;
+}
+  
+.content-section {
+    background: #ffffff;
+    padding: 1rem 1.5rem;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+}
+  
+.article-title {
+    color: #444444;
+}
+ 
+a.article-title:hover {
+    color: #428bca;
+    text-decoration: none;
+}
+  
+.article-content {
+    white-space: pre-line;
+}
+  
+.article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+}
+  
+.article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3
+}
+  
+.article-metadata a:hover {
+    color: #333;
+    text-decoration: none;
+}
+  
+.article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+}
+  
+.footer-icon-link{
+    color: white;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    text-decoration: none;
+}
+
+.footer-icon-link:hover{
+    text-decoration: none;
+}
+
+.footer-icon {
+    color: white;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.footer-icon:hover {
+    transform: scale(1.1);
+}
+
+.icon-bar {
+    position: fixed;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+@media screen and (max-width: 850px) {
+    .icon-bar {
+       display: None;
+    }
+ }
+  
+.icon-bar a {
+    display: block;
+    text-align: center;
+    padding: 16px;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 20px;
+}
+
+.icon-bar a:hover {
+    filter: brightness(75%);
+}
+
+.icon-bar a i {
+    transform: scale(1.2);
+}
+
+.github {
+    background-color: #24292E;
+    color: white
+}
+
+.linkedin {
+    background: #007bb5;
+    color: white;
+}
+
+.google {
+    background: #dd4b39;
+    color: white;
+}
+
+.instagram {
+    background-color: #DC2D78;
+    color: white;
+}
+
+.facebook {
+    background: #3B5998;
+    color: white;
+}
+
+.twitter {
+    background: #55ACEE;
+    color: white;
+}
+
+.kaggle {
+    background-color: black;
+    color: white;
+}
+
+footer {
+    background-color: #045DE9;
+    background-image: linear-gradient(45deg, #045DE9 0%, #09C6F9 74%);
+}
+
+#source-code-button {
+    text-decoration: none;
+    color: white;
+    align-items: center;
+}
+
+#source-code-button div {
+    background-color: black;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
+#source-code-button div:hover{
+    transform: scale(1.01);
+    box-shadow: 0px 0px 3px 1px lightblue;
+}
+
+#source-code-button div i {
+    vertical-align: middle;
+    margin-right: 0.5rem;
+}
+
+#dataset-button {
+    text-decoration: none;
+    color: black;
+    align-items: center;
+}
+
+#dataset-button div {
+    background-color: #FAF9F7;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
+#dataset-button div:hover{
+    transform: scale(1.01);
+    box-shadow: 0px 0px 3px 1px lightskyblue;
+}
+
+#dataset-button div i {
+    color: #20BEFF;
+    vertical-align: middle;
+    margin-right: 0.4rem;
+    margin-bottom: 0.2rem;
+    transform: scale(1.3);
+}
+
+#test-image-button {
+    text-decoration: none;
+    color: black;
+    align-items: center;
+}
+
+#test-image-button div{
+    background-color: #dae0e9;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: solid 0.5px lightgrey;
+    transition: all 0.2s ease-in-out;
+}
+
+#test-image-button div:hover{
+    transform: scale(1.01);
+    box-shadow: 0px 0px 3px 1px darkslategray;
+}
+
+.stats-button {
+    width: 100%;
+    padding: 0.5rem 0rem;
+    margin-bottom: 0;
+    border-radius: 3px;
+    color: white;
+    background-color: #7f5a83;
+    background-image: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%);
+    opacity: 80%;
+    transition: all 0.2s ease-in-out;
+}
+
+.stats-button:hover {
+    box-shadow: 0px 0px 3px 1px rgb(84, 26, 138);
+    transform: scale(1.01) ;
+    background-color: #7f5a83;
+    background-image: linear-gradient(270deg, #7f5a83 0%, #0d324d 74%);  
+}
+
+.stats-image {
+    height: 100%;
+    width: 100%;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+    z-index: 1;
+}
+
+.stats-image:hover {
+    border: 1px solid darkslategray;
+    transform: scale(4) translateX(-5rem) ;
+    box-shadow: 2px 2px 10px 0.1px black;
+    background-color: white;
+    z-index: 2;
+}
