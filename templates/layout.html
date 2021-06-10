@@ -47,9 +47,11 @@
                 </div>    
                 {% endif %}
 
+                {% if request.path not in ['/about'] %}
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
                 </div>
+                {% endif %}
             </div>
           </div>
         </nav>
@@ -101,6 +103,17 @@
                         </div>
                     </a>
                 </div>
+
+                {% if request.path in ['', '/', '/home', '/machine-learning', '/deep-learning'] %}
+                <hr>
+                <a href="{{ url_for('about') }}" id="source-code-button" class="github"
+                   rel="noopener noreferrer">
+                    <div class="content-section">
+                        About the Project
+                    </div>
+                </a>
+                {% endif %}
+
                 {% if request.path not in ['', '/', '/home', '/about', '/machine-learning', '/deep-learning'] %}
                 <hr>
                 <a href="{{ data_dict.get('source_code_link') }}" id="source-code-button" class="github"
