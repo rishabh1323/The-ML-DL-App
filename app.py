@@ -10,6 +10,7 @@ import warnings
 import numpy as np
 import tensorflow as tf
 from url_dict import url_dict
+from urllib.request import urlopen
 from tensorflow.keras.preprocessing import image
 from flask import Flask, render_template, redirect, url_for, request
 
@@ -76,9 +77,11 @@ def rock_paper_scissors():
 @app.route("/machine-learning/house-price-prediction/predict", methods=['GET', 'POST'])
 def house_price_prediction_predict():
     if request.method == 'POST':
-        models = pickle.load(open('saved_models/house_price_prediction/models.pkl', 'rb'))
-        minmax_scaler = pickle.load(open('saved_models/house_price_prediction/minmax_scaler.pkl', 'rb'))
-        label_encoder_dict = pickle.load(open('saved_models/house_price_prediction/label_encoders.pkl', 'rb'))
+        minmax_scaler_url = "https://the-ml-dl-app-bucket.s3.amazonaws.com/saved_models/house_price_prediction/minmax_scaler.pkl"
+        label_encoder_url = "https://the-ml-dl-app-bucket.s3.amazonaws.com/saved_models/house_price_prediction/label_encoders.pkl"
+
+        minmax_scaler = pickle.load(urlopen(minmax_scaler_url))
+        label_encoder_dict = pickle.load(urlopen(label_encoder_url))
 
         GrLivArea = np.log(float(request.form['GrLivArea']))
         stFlrSF = np.log(float(request.form['1stFlrSF']))
@@ -134,13 +137,14 @@ def house_price_prediction_predict():
         X_test = minmax_scaler.transform(X_test)  
 
         if Algorithm == 'linear_regressor':
-            prediction = models[0].predict(X_test)[0]
+            model_url = "https://the-ml-dl-app-bucket.s3.amazonaws.com/saved_models/house_price_prediction/linear_regression_model.pkl"
         elif Algorithm == 'support_vector_regressor':
-            prediction = models[1].predict(X_test)[0]
-        elif Algorithm == 'random_forest_regressor':
-            prediction = models[2].predict(X_test)[0]
+            model_url = "https://the-ml-dl-app-bucket.s3.amazonaws.com/saved_models/house_price_prediction/support_vector_regression_model.pkl"
         else:
-            prediction = models[3].predict(X_test)[0]
+            model_url = "https://the-ml-dl-app-bucket.s3.amazonaws.com/saved_models/house_price_prediction/random_forest_regression_model.pkl"
+
+        model = pickle.load(urlopen(model_url))
+        prediction = model.predict(X_test)[0]
         
         prediction_text = "The estimated price of the house is ${}".format(int(np.exp(prediction)))
         return render_template("predict/house_price_prediction.html", data_dict=url_dict['1'],
@@ -151,8 +155,11 @@ def house_price_prediction_predict():
 @app.route("/machine-learning/bank-note-authentication/predict", methods=['GET', 'POST'])
 def bank_note_authentication_predict():
     if request.method == 'POST':
-        models = pickle.load(open('saved_models/bank_note_authentication/models.pkl', 'rb'))
-        standard_scaler = pickle.load(open('saved_models/bank_note_authentication/standard_scaler.pkl', 'rb'))
+        model_url = "https://the-ml-dl-app-bucket.s3.amazonaws.com/saved_models/bank_note_authentication/models.pkl"
+        std_scaler_url = "https://the-ml-dl-app-bucket.s3.amazonaws.com/saved_models/bank_note_authentication/standard_scaler.pkl"
+
+        models = pickle.load(urlopen(model_url))
+        standard_scaler = pickle.load(urlopen(std_scaler_url))
 
         Variance = request.form['Variance']
         Skewness = request.form['Skewness']
@@ -183,7 +190,8 @@ def bank_note_authentication_predict():
 @app.route("/machine-learning/car-resale-value/predict", methods=['GET', 'POST'])
 def car_resale_value_predict():
     if request.method == 'POST':
-        models = pickle.load(open('saved_models/car_resale_value/models.pkl', 'rb'))
+        model_url = "https://the-ml-dl-app-bucket.s3.amazonaws.com/saved_models/car_resale_value/models.pkl"
+        models = pickle.load(urlopen(model_url))
 
         Year = int(request.form['Year'])
         Present_Price = request.form['Present_Price']
@@ -251,10 +259,6 @@ def digit_recognition_predict():
         os.remove('image.png')
         preprocessed_digits = []
 
-        print("***********************")
-        print(img.shape)
-        print("***********************")
-
         if img.shape != (28, 28, 3):
             grey = cv2.cvtColor(img.copy(), cv2.COLOR_BGR2GRAY)
             ret, thresh = cv2.threshold(grey.copy(), 75, 255, cv2.THRESH_BINARY_INV)
@@ -301,6 +305,7 @@ def digit_recognition_predict():
 @app.route("/deep-learning/rock-paper-scissors/predict", methods=['GET', 'POST'])
 def rock_paper_scissors_predict():
     if request.method == 'POST':
+        
         model = tf.keras.models.load_model('saved_models/rock_paper_scissors/saved_model/my_model')
         
         image_url = request.form['ImageUploadURL']
