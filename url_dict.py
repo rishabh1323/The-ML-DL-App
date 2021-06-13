@@ -61,6 +61,7 @@ url_dict = {
     # Rock Paper Scissors
     '3' : {
         "source_code_link" : "https://github.com/rishabh1323/Deep-Learning-Basic-Projects/tree/main/Rock%20Paper%20Scissors",
+        "dataset_link" : "https://laurencemoroney.com/datasets.html",
         "test_images_link" : "https://ia803402.us.archive.org/view_archive.php?archive=/11/items/rock-paper-scissors-dataset/rps-test-set.zip",
         "stats_images_list" : {
             "Graphs" : [
