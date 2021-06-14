@@ -41,7 +41,7 @@ pip install flask==2.0.0 numpy==1.19.5 opencv-python==4.5.2.52 Pillow==8.2.0 sci
 The web application is hosted on Heroku [here](https://the-ml-dl-app.herokuapp.com/).
 
 For local installation, follow these steps:
-1. Download source code from GitHub repository or [here](https://github.com/rishabh1323/The-ML-DL-App/archive/refs/heads/main.zip).
+1. Download source code from this repository or click [here](https://github.com/rishabh1323/The-ML-DL-App/archive/refs/heads/main.zip).
 2. Extract files to desired directory.
 3. [Download](https://www.python.org/downloads/) and install Python3 if not done already.
 4. Create a new python virtual environment.
