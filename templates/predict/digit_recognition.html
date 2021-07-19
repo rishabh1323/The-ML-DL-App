@@ -54,18 +54,18 @@
             <!-- Input URL Box -->
             <div class="row mt-4">
                 <div class="col-8 col-md-9 m-auto">
-                    <!-- <div class="file-upload-wrapper">
-                        <label for="image-upload">Upload Your Own Digit Image</label>
-                        <input type="file" name="ImageUpload" id="image-upload" value="{{ request.form['ImageUpload'] }}"
-                               class="file-upload" accept="image/*" />
-                    </div>
-                    <h4 class="mt-n1">OR</h4> -->
                     <div class="mt-3">
                         <label for="image-upload-url" class="mb-n4">Enter Image URL</label>
                         <br><small>(Use clear images for best results)</small>
                         <input type="url" name="ImageUploadURL" id="image-upload-url" placeholder="Enter Image URL"
                                value="{{ request.form['ImageUploadURL'] }}" class="mt-3" required>
                     </div>
+                    <!-- <h4 class="mt-n1">OR</h4>
+                    <div class="file-upload-wrapper">
+                        <label for="image-upload">Upload Your Own Digit Image</label>
+                        <input type="file" name="ImageUpload" id="image-upload" value="{{ request.form['ImageUpload'] }}"
+                               class="file-upload" accept="image/*" />
+                    </div> -->
                 </div>
             </div>
 

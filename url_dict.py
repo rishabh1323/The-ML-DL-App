@@ -34,7 +34,7 @@ url_dict = {
     '2' : {
         "source_code_link" : "https://github.com/rishabh1323/Deep-Learning-Basic-Projects/tree/main/MNIST%20Digit%20Recognition",
         "dataset_link" : "https://www.kaggle.com/scolianni/mnistasjpg",
-        "test_images_link" : "https://ia801408.us.archive.org/view_archive.php?archive=/17/items/mnist_digit_recognizer_dataset/test.zip",
+        "test_images_link" : "https://archive.org/download/mnist_digit_recognizer_dataset/test.zip/",
         "stats_images_list" : {
             "Graphs" : [
                 f"{root_url}2_graph_1.png", f"{root_url}2_graph_2.png"
@@ -62,7 +62,7 @@ url_dict = {
     '3' : {
         "source_code_link" : "https://github.com/rishabh1323/Deep-Learning-Basic-Projects/tree/main/Rock%20Paper%20Scissors",
         "dataset_link" : "https://laurencemoroney.com/datasets.html#rock-paper-scissors-dataset",
-        "test_images_link" : "https://ia803402.us.archive.org/view_archive.php?archive=/11/items/rock-paper-scissors-dataset/rps-test-set.zip",
+        "test_images_link" : "https://archive.org/download/rock-paper-scissors-dataset/rps-test-set.zip/",
         "stats_images_list" : {
             "Graphs" : [
                 f"{root_url}3_graph_1.png", f"{root_url}3_graph_2.png"
