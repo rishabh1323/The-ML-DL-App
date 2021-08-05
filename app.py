@@ -321,11 +321,10 @@ def rock_paper_scissors_predict():
         x = image.img_to_array(img)
         x = np.expand_dims(x/255.0, axis=0)
 
-        img = np.vstack([x])
-        classes = model.predict(img)[0]
-        if int(classes[0]) == 1:
+        classes = model.predict(x)[0]
+        if np.argmax(classes) == 0:
             predicted_class = "Paper"
-        elif int(classes[1]) == 1:
+        elif np.argmax(classes) == 1:
             predicted_class = "Rock"
         else:
             predicted_class = "Scissor"
