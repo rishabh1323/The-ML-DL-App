@@ -322,9 +322,9 @@ def rock_paper_scissors_predict():
         x = np.expand_dims(x/255.0, axis=0)
 
         classes = model.predict(x, batch_size=1)[0]
-        if classes[0] == 1.:
+        if int(classes[0]) == 1:
             predicted_class = "Paper"
-        elif classes[1] == 1.:
+        elif int(classes[1]) == 1:
             predicted_class = "Rock"
         else:
             predicted_class = "Scissor"
