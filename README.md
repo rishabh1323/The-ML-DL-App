@@ -63,7 +63,8 @@ source tutorial-env/bin/activate
 ```
 pip install flask==2.0.0 numpy==1.19.5 opencv-python==4.5.2.52 Pillow==8.2.0 scikit-learn==0.24.2 tensorflow-cpu==2.5.0
 ```
-7. Run a local server and launch the application.
+7. Start a local server on default port number.
 ```
 python app.py
 ```
+8. Go to `localhost:5000` from your browser to launch the application.

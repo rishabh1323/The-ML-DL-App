@@ -14,6 +14,7 @@ from urllib.request import urlopen
 from tensorflow.keras.preprocessing import image
 from flask import Flask, render_template, redirect, url_for, request
 
+# Suppress warnings
 warnings.filterwarnings('ignore')
 
 # Instantiating the Flask App
