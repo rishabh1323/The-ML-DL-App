@@ -1,4 +1,4 @@
-root_url = "https://the-ml-dl-app-bucket.s3.amazonaws.com/static/statistics_images/"
+root_url = "https://raw.githubusercontent.com/rishabh1323/The-ML-DL-App/main/static/statistics_images/"
 
 url_dict = {
     # House Price Prediction
